@@ -1,11 +1,8 @@
 <x-layout header="header-v4">
 
     <!-- Title page -->
-    <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
-        <h2 class="ltext-105 cl0 txt-center">
-            Hubungi Kami
-        </h2>
-    </section>
+    <x-title-page title="Hubungi Kami" />
+
 
 
     <!-- Content page -->
@@ -50,10 +47,10 @@
                             </span>
 
                             <p class="stext-115 cl6 size-213 p-t-18">
-                                {{ setting('site.company') }}
+                                {{ $web_var['company_name'] }}
                             </p>
                             <p class="stext-115 cl6 size-213">
-                                {{ setting('site.address') }}
+                                {{-- {{ setting('site.address') }} --}}
                             </p>
                         </div>
                     </div>
@@ -69,9 +66,9 @@
                             </span>
 
                             <p class="stext-115 cl1 size-213 p-t-18">
-                                {{ phone_format(setting('site.personal_phone')) }}
+                                {{-- {{ phone_format(setting('site.personal_phone')) }}
                                 /
-                                {{ phone_format(setting('site.company_phone')) }}
+                                {{ phone_format(setting('site.company_phone')) }} --}}
                             </p>
                         </div>
                     </div>
@@ -87,7 +84,7 @@
                             </span>
 
                             <p class="stext-115 cl1 size-213 p-t-18">
-                                {{ setting('site.email') }}
+                                {{-- {{ setting('site.email') }} --}}
                             </p>
                         </div>
                     </div>

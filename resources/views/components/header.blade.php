@@ -1,3 +1,8 @@
+<script>
+    function changePayment() {
+        document.getElementById("change-payment").submit();
+    }
+</script>
 <!-- Header desktop -->
 <div class="container-menu-desktop">
     <!-- Topbar -->
@@ -16,9 +21,12 @@
                     Akaun
                 </a>
 
-                <a href="#" class="flex-c-m trans-04 p-lr-25">
-                    MY
-                </a>
+                <form action="/change-payment" id="change-payment" method="POST">
+                    @csrf
+                    <a href="#" onclick="changePayment()" class="flex-c-m trans-04 p-lr-25">
+                        LO / Cash
+                    </a>
+                </form>
 
                 <a href="#" class="flex-c-m trans-04 p-lr-25">
                     MYR
@@ -75,7 +83,7 @@
                     <i class="zmdi zmdi-search"></i>
                 </div>
 
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+                <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ Cart::getContent()->count() }}">
                     <i class="zmdi zmdi-shopping-cart"></i>
                 </div>
 
@@ -100,7 +108,7 @@
             <i class="zmdi zmdi-search"></i>
         </div>
 
-        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="{{ Cart::getContent()->count() }}">
             <i class="zmdi zmdi-shopping-cart"></i>
         </div>
 
@@ -138,7 +146,7 @@
                 </a>
 
                 <a href="#" class="flex-c-m p-lr-10 trans-04">
-                    EN
+                    LO / Cash
                 </a>
 
                 <a href="#" class="flex-c-m p-lr-10 trans-04">

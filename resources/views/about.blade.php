@@ -1,12 +1,7 @@
 <x-layout header="header-v4">
 
     <!-- Title page -->
-    <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
-        <h2 class="ltext-105 cl0 txt-center">
-            Tentang Inspirazs
-        </h2>
-    </section>
-
+    <x-title-page title="Tentang Inspirazs" />
     <!-- Content page -->
     <section class="bg0 p-t-75 p-b-120">
         <div class="container">

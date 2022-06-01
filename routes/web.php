@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -23,6 +24,8 @@ Route::get('/', fn () => view('home', [
 
 Route::get('about', fn () => view('about'));
 Route::get('contact', fn () => view('contact'));
-Route::get('shopping-cart', fn () => view('shopping-cart'));
+Route::get('shopping-cart', [CartController::class, 'read']);
+Route::post('add-to-cart/{product}', [CartController::class, 'add']);
 Route::get('products', [ProductController::class, 'index']);
 Route::get('product/{slug}', [ProductController::class, 'select']);
+Route::get('checkout', [CartController::class, 'checkout']);

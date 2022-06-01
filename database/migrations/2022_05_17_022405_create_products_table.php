@@ -28,6 +28,9 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('product_categories');
             $table->integer('weight')->comment('in gram')->nullable();
+            $table->string('dimensions')->nullable();
+            $table->string('materials')->nullable();
+            $table->string('size')->nullable();
             $table->boolean('active')->default(1);
             $table->timestamps();
         });

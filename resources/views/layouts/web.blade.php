@@ -1,9 +1,9 @@
-@props(['header' => null])
+@props(['header' => null, 'title' => null])
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>{{ env('APP_NAME') }}</title>
+    <title>{{ $title ? $title . ' ~ ' . env('APP_NAME') : env('APP_NAME') }}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
