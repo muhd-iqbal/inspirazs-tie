@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+// use Cart;
 
 // reformat payment number with prefix zeroes
 if (!function_exists('payment_num')) {
@@ -138,3 +139,14 @@ if (!function_exists('month_name')) {
 //         return DB::table('web_variables')->first();
 //     }
 // }
+
+if (!function_exists('get_total_weight')) {
+    function get_total_weight()
+    {
+        $total = 0;
+        foreach (Cart::getContent() as $row) {
+            $total += $row->attributes->weight;
+        }
+        return $total;
+    }
+}

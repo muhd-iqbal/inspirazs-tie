@@ -19,7 +19,7 @@
                 @foreach (Cart::getContent() as $cart)
                     <li class="header-cart-item flex-w flex-t m-b-12">
                         <div class="header-cart-item-img">
-                            <img src="images/item-cart-01.jpg" alt="IMG">
+                            <img src="{{ asset('images/item-cart-01.jpg') }}" alt="IMG">
                         </div>
 
                         <div class="header-cart-item-txt p-t-8">
@@ -37,7 +37,7 @@
 
             <div class="w-full">
                 <div class="header-cart-total w-full p-tb-40">
-                    Jumlah: $75.00
+                    Jumlah: RM{{ RM(Cart::getTotal())}}
                 </div>
 
                 <div class="header-cart-buttons flex-w w-full">
@@ -45,8 +45,9 @@
                         class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                         Lihat Troli
                     </a>
-                    <form action="/shopping-cart/remove" method="POST">
+                    <form action="/shopping-cart" method="POST">
                         @csrf
+                        @method('DELETE')
                         <button class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                             Kosongkan
                         </button>

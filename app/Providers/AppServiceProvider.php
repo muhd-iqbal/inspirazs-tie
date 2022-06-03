@@ -25,9 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        foreach (Variable::all() as $var) :
-            $vars[$var->name] = $var->description;
-        endforeach;
-        View::share('web_var', $vars);
+        View::share('web_var', Variable::all()->pluck('description', 'name'));
     }
 }

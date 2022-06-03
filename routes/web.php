@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -25,7 +26,11 @@ Route::get('/', fn () => view('home', [
 Route::get('about', fn () => view('about'));
 Route::get('contact', fn () => view('contact'));
 Route::get('shopping-cart', [CartController::class, 'read']);
+Route::delete('shopping-cart', [CartController::class, 'destroy']);
 Route::post('add-to-cart/{product}', [CartController::class, 'add']);
 Route::get('products', [ProductController::class, 'index']);
 Route::get('product/{slug}', [ProductController::class, 'select']);
 Route::get('checkout', [CartController::class, 'checkout']);
+Route::post('checkout', [CartController::class, 'checkout_address']);
+Route::get('checkout-confirm', [CartController::class, 'checkout_confirm']);
+Route::post('checkout-confirm', [OrderController::class, 'add']);

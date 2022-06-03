@@ -27,7 +27,7 @@ class ProductSeeder extends Seeder
                 'price' => 3600,
                 'active' => 1,
                 'category_id' => 1,
-                'picture' => "images/logo-1.png",
+                'picture' => "images/icons/logo-01.png",
                 'slug' => "tali-leher-korporat",
                 'size' => "7cm, 8cm, 9cm"
             ],
@@ -36,7 +36,7 @@ class ProductSeeder extends Seeder
                 'price' => 9500,
                 'active' => 1,
                 'category_id' => 2,
-                'picture' => "images/logo-2.png",
+                'picture' => "images/icons/logo-02.png",
                 'slug' => "tudung-sutera",
                 'size' => "110cm X 110cm"
             ]

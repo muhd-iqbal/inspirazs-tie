@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('shipping_fees', function (Blueprint $table) {
+        Schema::create('shippings', function (Blueprint $table) {
             $table->id();
-            $table->string('postcode_fr', 5);
-            $table->string('postcode_to', 5);
+            $table->string('postcode_fr',5);
+            $table->string('postcode_to',5);
+            $table->integer('weight_fr');
+            $table->integer('weight_to');
+            $table->integer('fee');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shipping_fees');
+        Schema::dropIfExists('shippings');
     }
 };

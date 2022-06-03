@@ -81,43 +81,48 @@
     </div>
 
     <!-- Shoping Cart -->
-    <form class="bg0 p-t-30 p-b-85">
-        <div class="container">
+    {{-- <form class="bg0 p-t-30 p-b-85"> --}}
+        <div class="container p-t-30">
             <div class="row">
                 <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
                     <div class="m-l-25 m-r--38 m-lr-0-xl">
                         <div class="card">
                             <h5 class="text-center mb-4">Masukkan Maklumat Anda</h5>
-                            <form class="form-card" onsubmit="event.preventDefault()">
+                            <form class="form-card" action="/checkout" method="POST" id="checkout">
+                                @csrf
                                 <div class="row justify-content-between text-left">
-                                    <x-forms.textbox nm="name" lb="Nama Penuh" req="true" col="6" />
-                                    <x-forms.textbox nm="organisation" lb="Nama Organisasi / Syarikat / Sekolah"
+                                    <x-forms.textbox nm="customer_name" lb="Nama Penuh" req="true" col="6" />
+                                    <x-forms.textbox nm="customer_organisation" lb="Nama Organisasi / Syarikat / Sekolah"
                                         col="6" />
                                 </div>
                                 <div class="row justify-content-between text-left">
-                                    <x-forms.textbox nm="email" lb="Alamat Emel" req="true" col="6" />
-                                    <x-forms.textbox nm="phone" lb="No Telefon / WhatsApp" req="true" col="6" />
+                                    <x-forms.textbox nm="customer_email" lb="Alamat Emel" req="true" col="6" type="email" />
+                                    <x-forms.textbox nm="customer_phone" lb="No Telefon / WhatsApp" req="true" col="6" />
                                 </div>
                                 <div class="row justify-content-between text-left">
-                                    <x-forms.textbox nm="address" lb="Alamat Penuh" col="12" req="true" />
+                                    <x-forms.textbox nm="customer_address" lb="Alamat Penuh" col="12" req="true" />
                                 </div>
                                 <div class="row justify-content-between text-left">
-                                    <x-forms.textbox nm="postcode" lb="Poskod" col="4" req="true" />
-                                    <x-forms.textbox nm="city" lb="Bandar" col="4" req="true" />
-                                    <x-forms.textbox nm="state" lb="Negeri" col="4" req="true" />
+                                    <x-forms.textbox nm="customer_postcode" lb="Poskod" col="4" req="true" />
+                                    <x-forms.textbox nm="customer_city" lb="Bandar" col="4" req="true" />
+                                    <x-forms.textbox nm="customer_state" lb="Negeri" col="4" req="true" />
                                 </div>
                                 <div class="row justify-content-between text-left">
                                     <div class="form-group col-sm-12 flex-column d-flex">
                                         <span class="text-danger">
-                                            Sahkan bahawa maklumat yang dimasukkan adalah benar.
+                                            Sahkan bahawa maklumat yang dimasukkan adalah benar. Masukkan emel yang
+                                            aktif, invois akan dihantar melalui emel.
                                         </span>
                                     </div>
                                 </div>
                                 <div class="row justify-content-end text-right">
                                     <div class="form-group col-sm-6">
-                                        <button class="g-recaptchabtn-block btn-primary" type="submit"
+                                        <button type="submit"
+                                         class="g-recaptchabtn-block btn-dark"
                                             data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit'
-                                            data-action='submit'>Submit</button>
+                                            data-action='submit'>
+                                            Simpan
+                                        </button>
 
                                         {{-- <button type="submit" class="">Request a demo</button> --}}
                                     </div>
@@ -136,11 +141,11 @@
                         <div class="flex-w flex-t bor12 p-b-13">
                             @foreach (Cart::getContent() as $row)
                                 <div>
-                                    {{ $row->name }}
+                                    {{ $row->name . ' x ' . $row->quantity . ': RM' . RM($row->getPriceSum()) }}
                                 </div>
                             @endforeach
                         </div>
-                        <div class="flex-w flex-t bor12 p-b-13">
+                        {{-- <div class="flex-w flex-t bor12 p-b-13 pt-3">
                             <div class="size-208">
                                 <span class="stext-110 cl2">
                                     Subjumlah:
@@ -152,9 +157,8 @@
                                     RM{{ RM(Cart::getSubTotal()) }}
                                 </span>
                             </div>
-                        </div>
-
-                        <div class="bor12 p-t-15 p-b-30">
+                        </div> --}}
+                        {{-- <div class="bor12 p-t-15 p-b-30">
                             <div class="size-208 w-full-ssm">
                                 <span class="stext-110 cl2">
                                     Penghantaran:
@@ -178,19 +182,19 @@
                                         Masukkan Poskod
                                     </span>
 
-                                    {{-- <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+                                    <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
                                         <select class="js-select2" name="time">
                                             <option>Select a country...</option>
                                             <option>USA</option>
                                             <option>UK</option>
                                         </select>
                                         <div class="dropDownSelect2"></div>
-                                    </div> --}}
+                                    </div>
 
-                                    {{-- <div class="bor8 bg0 m-b-12">
+                                    <div class="bor8 bg0 m-b-12">
                                         <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state"
                                             placeholder="State /  country">
-                                    </div> --}}
+                                    </div>
 
                                     <div class="bor8 bg0 m-b-22">
                                         <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode"
@@ -206,9 +210,9 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="flex-w flex-t p-t-27 p-b-33">
+                        <div class="flex-w flex-t p-t-27">
                             <div class="size-208">
                                 <span class="mtext-101 cl2">
                                     Jumlah:
@@ -217,23 +221,23 @@
 
                             <div class="size-209 p-t-1">
                                 <span class="mtext-110 cl2">
-                                    $79.65
+                                    RM{{ RM(Cart::getSubTotal()) }}
                                 </span>
                             </div>
                         </div>
 
-                        <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                        {{-- <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
                             Proceed to Checkout
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    {{-- </form> --}}
 
     <script>
         function onSubmit(token) {
-            document.getElementById("demo-form").submit();
+            document.getElementById("checkout").submit();
         }
     </script>
 

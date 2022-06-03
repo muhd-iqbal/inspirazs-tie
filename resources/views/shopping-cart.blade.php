@@ -35,12 +35,12 @@
                                             <td class="column-1">
                                                 <a href="/product/{{ $row->model->slug }}">
                                                     <div class="how-itemcart1">
-                                                        <img src="{{ asset($row->model->picture) }}" alt="IMG">
+                                                        <img src="{{ asset($row->model->picture) }}" alt="{{ $row->model->name }}">
                                                     </div>
                                                 </a>
                                             </td>
-                                            <td class="text-center"><a
-                                                    href="/product/{{ $row->model->slug }}">{{ $row->name }}</a>
+                                            <td class="text-center">
+                                                <a href="/product/{{ $row->model->slug }}">{{ $row->name }}</a>
                                             </td>
                                             <td class="text-center">{{ RM($row->price) }}</td>
                                             <td class="text-center">{{ $row->quantity }}</td>
@@ -59,7 +59,11 @@
                                 @endif
                             </table>
                         </div>
-
+                        @if (Cart::getContent()->count() > 0)
+                            <div class="mt-3">
+                                <a href="/products" class="btn btn-warning">Klik sini untuk tambah produk.</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
 
@@ -84,12 +88,18 @@
                         </div>
 
                         <div class="bor12 p-t-15 p-b-30">
-                            <div class="size-208 w-full-ssm">
+                            <div>
+                                Berat keseluruhan: {{ get_total_weight()  }} kg
+                            </div>
+                            <div class="text-danger small">
+                                * Caj penghantaran akan dikira selepas pelanggan mengisi maklumat. Percuma untuk tempahan
+                                melebihi 300 unit.
+                            </div>
+                            {{-- <div class="size-208 w-full-ssm">
                                 <span class="stext-110 cl2">
                                     Penghantaran:
                                 </span>
                             </div>
-
                             <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
                                 <p class="stext-111 cl6 p-t-2">
                                 <div class="flex-w">
@@ -120,7 +130,7 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="flex-w flex-t p-t-27 p-b-33">
@@ -132,7 +142,7 @@
 
                             <div class="size-209 p-t-1">
                                 <span class="mtext-110 cl2">
-                                    {{ RM(Cart::getTotal())}}
+                                    {{ RM(Cart::getTotal()) }}
                                 </span>
                             </div>
                         </div>
