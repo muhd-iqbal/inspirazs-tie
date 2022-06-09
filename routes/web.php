@@ -53,3 +53,7 @@ Route::post('toyyibpay-callback', [ToyyibpayController::class, 'callback'])->nam
 Route::get('admin/variables', fn () => view('admin.vars', ['vars' => Variable::all()]));
 Route::post('admin/var', [VariableController::class, 'add']);
 Route::post('admin/var/{var}', [VariableController::class, 'update']);
+
+Auth::routes();
+
+Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
