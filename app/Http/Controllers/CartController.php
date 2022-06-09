@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductPrice;
+use App\Models\Variable;
 use Illuminate\Http\Request;
 use Cart;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,7 @@ class CartController extends Controller
             'quantity' => 'required|numeric|min:' . $min,
         ]);
 
-        if (session('payment') == "loan") {
+        if (session('loan')) {
             $price = $list_price->loan;
         } else {
             $price = $list_price->cash;
@@ -75,22 +76,29 @@ class CartController extends Controller
             'customer_state' => 'required|max:50',
         ]);
 
-        $shipping = DB::table('shippings')
-            ->select('fee')
-            ->where('postcode_fr', '<=', $request->customer_postcode)
-            ->where('postcode_to', '>=', $request->customer_postcode)
-            ->where('weight_fr', '<=', get_total_weight())
-            ->where('weight_to', '>=', get_total_weight())
-            ->first();
+        if (Cart::getTotalQuantity() >= Variable::select('description')->where('name', '=', 'free_shipping')->first()->description) {
+            session(['shipping_fees' => 0]);
+        } else {
+            $shipping = DB::table('shippings')
+                ->select('fee')
+                ->where('postcode_fr', '<=', $request->customer_postcode)
+                ->where('postcode_to', '>=', $request->customer_postcode)
+                ->where('weight_fr', '<=', get_total_weight())
+                ->where('weight_to', '>=', get_total_weight())
+                ->first();
+
+            session(['shipping_fees' => $shipping->fee]);
+        }
 
         session($request->toArray());
-        session(['shipping_fees' => $shipping->fee]);
-
         return redirect('/checkout-confirm');
     }
 
     public function checkout_confirm()
     {
+        if (Cart::getContent()->count() == 0) {
+            return redirect('/products')->with('danger', 'Troli Kosong, sila tambah produk ke dalam troli terlebih dahulu.');
+        }
         return view('checkout-confirm');
     }
 

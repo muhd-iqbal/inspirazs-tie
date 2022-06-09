@@ -29,6 +29,9 @@ return new class extends Migration
             $table->integer('shipping');
             $table->integer('grand_total');
             $table->string('hash');
+            $table->integer('paid')->default(0);
+            $table->string('payment_method')->nullable();
+            $table->string('toyyibpay_billcode')->nullable();
             $table->timestamps();
         });
         Schema::create('order_items', function (Blueprint $table) {

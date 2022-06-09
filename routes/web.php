@@ -3,8 +3,13 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ToyyibpayController;
+use App\Http\Controllers\VariableController;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Variable;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +28,7 @@ Route::get('/', fn () => view('home', [
     'categories' => ProductCategory::where('featured', 1)->get(),
 ]));
 
+Route::post('ch-method', [OrderController::class, 'ch_pay_method']);
 Route::get('about', fn () => view('about'));
 Route::get('contact', fn () => view('contact'));
 Route::get('shopping-cart', [CartController::class, 'read']);
@@ -34,3 +40,16 @@ Route::get('checkout', [CartController::class, 'checkout']);
 Route::post('checkout', [CartController::class, 'checkout_address']);
 Route::get('checkout-confirm', [CartController::class, 'checkout_confirm']);
 Route::post('checkout-confirm', [OrderController::class, 'add']);
+Route::get('/o/{hash}/{order}', [OrderController::class, 'view']);
+Route::get('pay/{order}', [OrderController::class, 'payment']);
+
+Route::get('ss', fn (Request $request) => $request->session()->all());
+Route::get('o', fn () => view('admin.orders', ['orders' => Order::all()]));
+
+Route::get('toyyibpay/{order}', [ToyyibpayController::class, 'create'])->name('toyyibpay-create');
+Route::get('toyyibpay-status', [ToyyibpayController::class, 'status'])->name('toyyibpay-status');
+Route::post('toyyibpay-callback', [ToyyibpayController::class, 'callback'])->name('toyyibpay-callback');
+
+Route::get('admin/variables', fn () => view('admin.vars', ['vars' => Variable::all()]));
+Route::post('admin/var', [VariableController::class, 'add']);
+Route::post('admin/var/{var}', [VariableController::class, 'update']);

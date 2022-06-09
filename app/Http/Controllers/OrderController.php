@@ -16,10 +16,10 @@ class OrderController extends Controller
         ]);
 
         $hash = sha1(session('email'));
-
+        $method = session('loan') ? 'loan' : 'cash';
         $order = Order::create([
             'hash' => $hash,
-            'method' => 'cash',//change
+            'method' => $method, //change
             'customer_name' => session('customer_name'),
             'customer_organisation' => session('customer_organisation'),
             'customer_address' => session('customer_address'),
@@ -45,5 +45,45 @@ class OrderController extends Controller
         }
 
         return redirect("/o/$hash/$order->id");
+    }
+
+    public function view($hash, $order)
+    {
+        $order = Order::with(['item','payment'])->where('hash', $hash)->where('id', $order)->first();
+
+        if ($order) {
+            return view('order', [
+                'order' => $order,
+            ]);
+        } else {
+            return redirect('/shopping-cart')->with('forbidden', 'Pesanan tidak dijumpai. Sila semak semula pautan di emel / WhatsApp.');
+        }
+    }
+
+    public function ch_pay_method(Request $request)
+    {
+        Cart::clear();
+
+        if (session('loan')) {
+            $request->session()->forget('loan');
+        } else {
+            $request->session()->put('loan', true);
+        }
+
+        return back();
+    }
+
+    public function payment(Order $order)
+    {
+        if(request('method')=='fpx'){
+            return redirect('/toyyibpay/'.$order->id);
+        }
+        elseif(request('method')=='transfer'){
+            $order->update(['method'=>'transfer']);
+            return back();
+        }
+        else{
+            return 404;
+        }
     }
 }

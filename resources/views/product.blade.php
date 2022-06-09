@@ -1,5 +1,14 @@
 <x-layout header="header-v4">
+    <style>
+        th {
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
 
+        td {
+            border: 1px solid #e9ecef;
+        }
+    </style>
     <!-- breadcrumb -->
     <div class="container">
         <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -25,7 +34,8 @@
         <div class="container">
             @if (session('success'))
                 <div class="alert alert-success">
-                    <i class="fa fa-shopping-cart" style="margin-right:10px; font-size:20px"></i> {{ session('success') }}
+                    <i class="fa fa-shopping-cart" style="margin-right:10px; font-size:20px"></i>
+                    {{ session('success') }}
                 </div>
             @endif
             <div class="row">
@@ -33,7 +43,7 @@
                     <div class="p-l-25 p-r-30 p-lr-0-lg">
                         <div class="wrap-slick3 flex-sb flex-w">
                             <div class="wrap-slick3-dots"></div>
-                            <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+                            <div class="wrap-slick3-arows flex-sb-m flex-w"></div>
 
                             <div class="slick3 gallery-lb">
                                 <div class="item-slick3" data-thumb="{{ asset('images/product-detail-01.jpg') }}">
@@ -41,31 +51,31 @@
                                         <img src="{{ asset('images/product-detail-01.jpg') }}" alt="IMG-PRODUCT">
 
                                         <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                        href="{{ asset('images/product-detail-01.jpg') }}">
-                                        <i class="fa fa-expand"></i>
-                                    </a>
+                                            href="{{ asset('images/product-detail-01.jpg') }}">
+                                            <i class="fa fa-expand"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="item-slick3" data-thumb="{{ asset('images/product-detail-02.jpg') }}">
-                                <div class="wrap-pic-w pos-relative">
+                                <div class="item-slick3" data-thumb="{{ asset('images/product-detail-02.jpg') }}">
+                                    <div class="wrap-pic-w pos-relative">
                                         <img src="{{ asset('images/product-detail-02.jpg') }}" alt="IMG-PRODUCT">
 
                                         <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                        href="{{ asset('images/product-detail-02.jpg') }}">
-                                        <i class="fa fa-expand"></i>
-                                    </a>
+                                            href="{{ asset('images/product-detail-02.jpg') }}">
+                                            <i class="fa fa-expand"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
 
                                 <div class="item-slick3" data-thumb="{{ asset('images/product-detail-03.jpg') }}">
                                     <div class="wrap-pic-w pos-relative">
                                         <img src="{{ asset('images/product-detail-03.jpg') }}" alt="IMG-PRODUCT">
 
                                         <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                        href="{{ asset('images/product-detail-03.jpg') }}">
-                                        <i class="fa fa-expand"></i>
-                                    </a>
+                                            href="{{ asset('images/product-detail-03.jpg') }}">
+                                            <i class="fa fa-expand"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -75,17 +85,17 @@
 
                 <div class="col-md-6 col-lg-5 p-b-30">
                     <div class="p-r-50 p-t-5 p-lr-0-lg text-center">
-                        <h4 class="mtext-105 cl2 js-name-detail p-b-14">
+                        <h3 class="mtext-105 cl2 js-name-detail p-b-14">
                             {{ $product->name }}
-                        </h4>
+                        </h3>
 
                         {{-- <span class="mtext-106 cl2">
                             RM{{ RM($product->featured_price) }}
                         </span> --}}
 
                         <div class="stext-102 cl3 p-t-23">
-                            <table class="w-100">
-                                <tr>
+                            <table class="w-100 border border-collapsed">
+                                <tr class="bg-secondary text-light">
                                     <th>Kuantiti</th>
                                     <th>Harga Tunai (RM)</th>
                                     <th>Harga LO (RM)</th>
@@ -208,7 +218,9 @@
                                 <div class="input-group mb-3">
                                     <input type="number" name="quantity" class="form-control"
                                         placeholder="Masukkan Kuantiti" aria-label="Masukkan Kuantiti"
-                                        aria-describedby="basic-addon2" value="{{ $prices->min('min') }}" required>
+                                        aria-describedby="basic-addon2"
+                                        value="{{ Cart::get($product->id) ? Cart::get($product->id)->quantity : $prices->min('min') }}"
+                                        required>
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" type="sumbit">Tambah ke Troli</button>
                                     </div>

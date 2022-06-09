@@ -56,7 +56,6 @@
             box-shadow: none !important;
             outline-width: 0
         }
-
     </style>
     <script src="https://www.google.com/recaptcha/api.js"></script>
 
@@ -82,70 +81,108 @@
 
     <!-- Shoping Cart -->
     {{-- <form class="bg0 p-t-30 p-b-85"> --}}
-        <div class="container p-t-30">
-            <div class="row">
-                <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
-                    <div class="m-l-25 m-r--38 m-lr-0-xl">
-                        <div class="card">
-                            <h5 class="text-center mb-4">Masukkan Maklumat Anda</h5>
-                            <form class="form-card" action="/checkout" method="POST" id="checkout">
-                                @csrf
-                                <div class="row justify-content-between text-left">
-                                    <x-forms.textbox nm="customer_name" lb="Nama Penuh" req="true" col="6" />
-                                    <x-forms.textbox nm="customer_organisation" lb="Nama Organisasi / Syarikat / Sekolah"
-                                        col="6" />
-                                </div>
-                                <div class="row justify-content-between text-left">
-                                    <x-forms.textbox nm="customer_email" lb="Alamat Emel" req="true" col="6" type="email" />
-                                    <x-forms.textbox nm="customer_phone" lb="No Telefon / WhatsApp" req="true" col="6" />
-                                </div>
-                                <div class="row justify-content-between text-left">
-                                    <x-forms.textbox nm="customer_address" lb="Alamat Penuh" col="12" req="true" />
-                                </div>
-                                <div class="row justify-content-between text-left">
-                                    <x-forms.textbox nm="customer_postcode" lb="Poskod" col="4" req="true" />
-                                    <x-forms.textbox nm="customer_city" lb="Bandar" col="4" req="true" />
-                                    <x-forms.textbox nm="customer_state" lb="Negeri" col="4" req="true" />
-                                </div>
-                                <div class="row justify-content-between text-left">
-                                    <div class="form-group col-sm-12 flex-column d-flex">
-                                        <span class="text-danger">
-                                            Sahkan bahawa maklumat yang dimasukkan adalah benar. Masukkan emel yang
-                                            aktif, invois akan dihantar melalui emel.
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row justify-content-end text-right">
-                                    <div class="form-group col-sm-6">
-                                        <button type="submit"
-                                         class="g-recaptchabtn-block btn-dark"
-                                            data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit'
-                                            data-action='submit'>
-                                            Simpan
-                                        </button>
+    <div class="container p-t-30">
+        <div class="row">
 
-                                        {{-- <button type="submit" class="">Request a demo</button> --}}
-                                    </div>
+            <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+                <div class="m-l-25 m-r--38 m-lr-0-xl">
+                    <!-- Button trigger modal -->
+                    {{-- <div class="mb-2">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#existingModal">
+                            Pernah buat pesanan?
+                        </button>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="existingModal" tabindex="-1" aria-labelledby="existingModalLabel"
+                        aria-hidden="true" style="z-index: 1111">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Masukkan maklumat anda.</h5>
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                            </form>
+                                <form>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="name">Nama Penuh</label>
+                                            <input type="name" class="form-control" id="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Alamat Emel</label>
+                                            <input type="email" class="form-control" id="email">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Cari</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Batal</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
+                    </div> --}}
+                    <div class="card">
+                        <h5 class="text-center mb-4">Masukkan Maklumat Anda</h5>
+                        <form class="form-card" action="/checkout" method="POST" id="checkout">
+                            @csrf
+                            <div class="row justify-content-between text-left">
+                                <x-forms.textbox nm="customer_name" lb="Nama Penuh" req="true" col="6" />
+                                <x-forms.textbox nm="customer_organisation" lb="Nama Organisasi / Syarikat / Sekolah"
+                                    col="6" />
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <x-forms.textbox nm="customer_email" lb="Alamat Emel" req="true" col="6" type="email" />
+                                <x-forms.textbox nm="customer_phone" lb="No Telefon / WhatsApp" req="true" col="6" />
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <x-forms.textbox nm="customer_address" lb="Alamat Penuh" col="12" req="true" />
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <x-forms.textbox nm="customer_postcode" lb="Poskod" col="4" req="true" />
+                                <x-forms.textbox nm="customer_city" lb="Bandar" col="4" req="true" />
+                                <x-forms.textbox nm="customer_state" lb="Negeri" col="4" req="true" />
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-12 flex-column d-flex">
+                                    <span class="text-danger">
+                                        Sahkan bahawa maklumat yang dimasukkan adalah benar. Masukkan emel yang
+                                        aktif, invois akan dihantar melalui emel.
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row justify-content-end text-right">
+                                <div class="form-group col-sm-6">
+                                    <button type="submit" class="g-recaptchabtn-block btn-dark"
+                                        data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit'>
+                                        Simpan
+                                    </button>
+
+                                    {{-- <button type="submit" class="">Request a demo</button> --}}
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
-                    <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-                        <h4 class="mtext-109 cl2 p-b-15">
-                            Ringkasan
-                        </h4>
+            <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+                <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+                    <h4 class="mtext-109 cl2 p-b-15">
+                        Ringkasan
+                    </h4>
 
-                        <div class="flex-w flex-t bor12 p-b-13">
-                            @foreach (Cart::getContent() as $row)
-                                <div>
-                                    {{ $row->name . ' x ' . $row->quantity . ': RM' . RM($row->getPriceSum()) }}
-                                </div>
-                            @endforeach
-                        </div>
-                        {{-- <div class="flex-w flex-t bor12 p-b-13 pt-3">
+                    <div class="flex-w flex-t bor12 p-b-13">
+                        @foreach (Cart::getContent() as $row)
+                            <div>
+                                {{ $row->name . ' x ' . $row->quantity . ': RM' . RM($row->getPriceSum()) }}
+                            </div>
+                        @endforeach
+                    </div>
+                    {{-- <div class="flex-w flex-t bor12 p-b-13 pt-3">
                             <div class="size-208">
                                 <span class="stext-110 cl2">
                                     Subjumlah:
@@ -158,7 +195,7 @@
                                 </span>
                             </div>
                         </div> --}}
-                        {{-- <div class="bor12 p-t-15 p-b-30">
+                    {{-- <div class="bor12 p-t-15 p-b-30">
                             <div class="size-208 w-full-ssm">
                                 <span class="stext-110 cl2">
                                     Penghantaran:
@@ -212,27 +249,27 @@
                             </div>
                         </div> --}}
 
-                        <div class="flex-w flex-t p-t-27">
-                            <div class="size-208">
-                                <span class="mtext-101 cl2">
-                                    Jumlah:
-                                </span>
-                            </div>
-
-                            <div class="size-209 p-t-1">
-                                <span class="mtext-110 cl2">
-                                    RM{{ RM(Cart::getSubTotal()) }}
-                                </span>
-                            </div>
+                    <div class="flex-w flex-t p-t-27">
+                        <div class="size-208">
+                            <span class="mtext-101 cl2">
+                                Jumlah:
+                            </span>
                         </div>
 
-                        {{-- <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                        <div class="size-209 p-t-1">
+                            <span class="mtext-110 cl2">
+                                RM{{ RM(Cart::getSubTotal()) }}
+                            </span>
+                        </div>
+                    </div>
+
+                    {{-- <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
                             Proceed to Checkout
                         </button> --}}
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     {{-- </form> --}}
 
     <script>

@@ -25,4 +25,12 @@ class ProductController extends Controller
             'prices' => ProductPrice::where('product_id', $product->id)->orderBy('min', 'ASC')->get(),
         ]);
     }
+
+    public function add(Request $request)
+    {
+        // recommend image is 1200px x 1485px
+        $attr = $request->validate([
+            'name' => 'required|unique:products,name|max:255|min:5'
+        ]);
+    }
 }

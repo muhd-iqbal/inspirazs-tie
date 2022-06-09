@@ -91,7 +91,8 @@
         <div class="card">
             <div class="card-header">
                 Tarikh: <strong>{{ date('d-m-Y') }}</strong>
-                {{-- <span class="float-right"> <strong>Status:</strong></span> --}}
+                <span class="float-right"> <strong>Pembayaran:
+                        {{ session('loan') ? 'Pinjaman (LO)' : 'Tunai' }}</strong></span>
 
             </div>
             <div class="card-body">
@@ -178,7 +179,9 @@
                                     <td class="left">
                                         <strong>Penghantaran</strong>
                                     </td>
-                                    <td class="right">RM{{ RM(session('shipping_fees')) }} ({{ get_total_weight()/1000 }}kg)</td>
+                                    <td class="right">
+                                        {{ session('shipping_fees') > 0 ? 'RM' . RM(session('shipping_fees')) .'('. get_total_weight() / 1000 .'kg)' : 'Percuma melebihi ' . $web_var['free_shipping'] . ' unit' }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="left">
@@ -198,7 +201,8 @@
                         @csrf
                         <div class="col-12">
                             <div class="form-check">
-                                <input class="d-inline" type="checkbox" name="add_order" id="invalidCheck" required />
+                                <input class="d-inline" type="checkbox" name="add_order" id="invalidCheck"
+                                    required />
                                 <label class="d-inline" for="invalidCheck">Tandakan untuk sahkan pesanan.</label>
                                 <div class="invalid-feedback">Anda perlu sahkan pesanan tengan menanda ruangan ini.
                                 </div>
@@ -206,9 +210,9 @@
                         </div>
                         <div class="col-12">
                             {{-- <button class="btn btn-primary" type="submit"> --}}
-                                <button type="submit" class="g-recaptchabtn-block btn-dark"
-                                    data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit'>
-                                    Sahkan Pesanan Anda</button>
+                            <button type="submit" class="g-recaptchabtn-block btn-dark"
+                                data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit'>
+                                Sahkan Pesanan Anda</button>
                         </div>
                     </form>
                 </div>

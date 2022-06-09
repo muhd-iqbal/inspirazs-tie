@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-6 col-lg-3 p-b-50">
             <h4 class="stext-301 cl0 p-b-30">
-                Categories
+                Kategori
             </h4>
 
             <ul>
@@ -34,31 +34,32 @@
 
         <div class="col-sm-6 col-lg-3 p-b-50">
             <h4 class="stext-301 cl0 p-b-30">
-                Help
+                Pautan
             </h4>
 
             <ul>
+
                 <li class="p-b-10">
                     <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                        Track Order
+                        Cara Pesanan
                     </a>
                 </li>
 
                 <li class="p-b-10">
                     <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                        Returns
+                        Cara Pembayaran
                     </a>
                 </li>
 
                 <li class="p-b-10">
                     <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                        Shipping
+                        Soalan Lazim
                     </a>
                 </li>
 
                 <li class="p-b-10">
                     <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                        FAQs
+                        Laman Web Inspirazs
                     </a>
                 </li>
             </ul>
@@ -66,12 +67,12 @@
 
         <div class="col-sm-6 col-lg-3 p-b-50">
             <h4 class="stext-301 cl0 p-b-30">
-                GET IN TOUCH
+                Hubungi Kami
             </h4>
 
             <p class="stext-107 cl7 size-201">
                 Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on
-                (+1) 96 716 6879
+                (+60) 13-530 3135
             </p>
 
             <div class="p-t-27">
@@ -113,23 +114,23 @@
     <div class="p-t-40">
         <div class="flex-c-m flex-w p-b-18">
             <a href="#" class="m-all-1">
-                <img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
+                <img src="{{ asset('images/icons/icon-pay-01.png') }}" alt="ICON-PAY">
             </a>
 
             <a href="#" class="m-all-1">
-                <img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
+                <img src="{{ asset('images/icons/icon-pay-02.png') }}" alt="ICON-PAY">
             </a>
 
             <a href="#" class="m-all-1">
-                <img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
+                <img src="{{ asset('images/icons/icon-pay-03.png') }}" alt="ICON-PAY">
             </a>
 
             <a href="#" class="m-all-1">
-                <img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
+                <img src="{{ asset('images/icons/icon-pay-04.png') }}" alt="ICON-PAY">
             </a>
 
             <a href="#" class="m-all-1">
-                <img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
+                <img src="{{ asset('images/icons/icon-pay-05.png') }}" alt="ICON-PAY">
             </a>
         </div>
 

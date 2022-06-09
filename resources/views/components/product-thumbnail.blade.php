@@ -20,7 +20,7 @@
                     </a>
 
                     <span class="stext-105 cl3">
-                        RM{{ RM($product->featured_price) }}
+                        RM{{ RM($product->price) }}
                     </span>
                 </div>
 

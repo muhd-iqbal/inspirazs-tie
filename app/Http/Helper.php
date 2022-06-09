@@ -133,13 +133,6 @@ if (!function_exists('month_name')) {
     }
 }
 
-// if(!function_exists('web_var')){
-//     function web_var()
-//     {
-//         return DB::table('web_variables')->first();
-//     }
-// }
-
 if (!function_exists('get_total_weight')) {
     function get_total_weight()
     {

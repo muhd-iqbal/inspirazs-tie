@@ -16,11 +16,11 @@ class ShippingSeeder extends Seeder
     public function run()
     {
         DB::table('shippings')->insert([
-            ['postcode_fr' => '01000', 'postcode_to' => '86999', 'weight_fr' => 100, 'weight_to' => 500, 'fee' => 956], //sm
-            ['postcode_fr' => '87000', 'postcode_to' => '88999', 'weight_fr' => 100, 'weight_to' => 500, 'fee' => 1673], //kk
-            ['postcode_fr' => '89000', 'postcode_to' => '92999', 'weight_fr' => 100, 'weight_to' => 500, 'fee' => 1719], //sb
-            ['postcode_fr' => '93000', 'postcode_to' => '93999', 'weight_fr' => 100, 'weight_to' => 500, 'fee' => 1481], //ku
-            ['postcode_fr' => '94000', 'postcode_to' => '99999', 'weight_fr' => 100, 'weight_to' => 500, 'fee' => 1719], //sr
+            ['postcode_fr' => '01000', 'postcode_to' => '86999', 'weight_fr' => 50, 'weight_to' => 500, 'fee' => 956], //sm
+            ['postcode_fr' => '87000', 'postcode_to' => '88999', 'weight_fr' => 50, 'weight_to' => 500, 'fee' => 1673], //kk
+            ['postcode_fr' => '89000', 'postcode_to' => '92999', 'weight_fr' => 50, 'weight_to' => 500, 'fee' => 1719], //sb
+            ['postcode_fr' => '93000', 'postcode_to' => '93999', 'weight_fr' => 50, 'weight_to' => 500, 'fee' => 1481], //ku
+            ['postcode_fr' => '94000', 'postcode_to' => '99999', 'weight_fr' => 50, 'weight_to' => 500, 'fee' => 1719], //sr
             //501-1000
             ['postcode_fr' => '01000', 'postcode_to' => '86999', 'weight_fr' => 501, 'weight_to' => 1000, 'fee' => 1244], //sm
             ['postcode_fr' => '87000', 'postcode_to' => '88999', 'weight_fr' => 501, 'weight_to' => 1000, 'fee' => 2190], //kk
@@ -81,6 +81,12 @@ class ShippingSeeder extends Seeder
             ['postcode_fr' => '89000', 'postcode_to' => '92999', 'weight_fr' => 9001, 'weight_to' => 10000, 'fee' => 20393], //sb
             ['postcode_fr' => '93000', 'postcode_to' => '93999', 'weight_fr' => 9001, 'weight_to' => 10000, 'fee' => 14488], //ku
             ['postcode_fr' => '94000', 'postcode_to' => '99999', 'weight_fr' => 9001, 'weight_to' => 10000, 'fee' => 20393], //sr
+            //more than 10000
+            ['postcode_fr' => '01000', 'postcode_to' => '86999', 'weight_fr' => 10001, 'weight_to' => 0, 'fee' => 238], //sm
+            ['postcode_fr' => '87000', 'postcode_to' => '88999', 'weight_fr' => 10001, 'weight_to' => 0, 'fee' => 1647], //kk
+            ['postcode_fr' => '89000', 'postcode_to' => '92999', 'weight_fr' => 10001, 'weight_to' => 0, 'fee' => 1998], //sb
+            ['postcode_fr' => '93000', 'postcode_to' => '93999', 'weight_fr' => 10001, 'weight_to' => 0, 'fee' => 1418], //ku
+            ['postcode_fr' => '94000', 'postcode_to' => '99999', 'weight_fr' => 10001, 'weight_to' => 0, 'fee' => 1998], //sr
         ]);
     }
 }
