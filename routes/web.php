@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ToyyibpayController;
 use App\Http\Controllers\VariableController;
@@ -56,4 +58,17 @@ Route::post('admin/var/{var}', [VariableController::class, 'update']);
 
 Auth::routes();
 
-Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
+
+
+Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
+{
+    Route::get('/', [HomeController::class, 'index'])->name('admin');
+    Route::get('categories', [ProductCategoryController::class, 'index']);
+    Route::post('categories', [ProductCategoryController::class, 'add']);
+    Route::get('products', [ProductController::class, 'list']);
+    Route::post('products', [ProductController::class, 'add']);
+    Route::get('product/{product}', [ProductController::class, 'view']);
+    Route::patch('product/{product}', [ProductController::class, 'update']);
+    Route::post('product/{product}', [ProductController::class, 'add_image']);
+
+});

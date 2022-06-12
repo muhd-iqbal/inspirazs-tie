@@ -46,9 +46,9 @@
                             <div class="wrap-slick3-arows flex-sb-m flex-w"></div>
 
                             <div class="slick3 gallery-lb">
-                                <div class="item-slick3" data-thumb="{{ asset('images/product-detail-01.jpg') }}">
+                                <div class="item-slick3" data-thumb="{{ asset('storage/products/'.$product->picture) }}">
                                     <div class="wrap-pic-w pos-relative">
-                                        <img src="{{ asset('images/product-detail-01.jpg') }}" alt="IMG-PRODUCT">
+                                        <img src="{{ asset('storage/products/'.$product->picture) }}" alt="IMG-PRODUCT">
 
                                         <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
                                             href="{{ asset('images/product-detail-01.jpg') }}">
@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
 
-                                <div class="item-slick3" data-thumb="{{ asset('images/product-detail-02.jpg') }}">
+                                {{-- <div class="item-slick3" data-thumb="{{ asset('images/product-detail-02.jpg') }}">
                                     <div class="wrap-pic-w pos-relative">
                                         <img src="{{ asset('images/product-detail-02.jpg') }}" alt="IMG-PRODUCT">
 
@@ -77,7 +77,7 @@
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -339,7 +339,7 @@
                                             </span>
 
                                             <span class="stext-102 cl6 size-206">
-                                                {{ $product->dimension }}
+                                                {{ $product->dimensions }}
                                             </span>
                                         </li>
 
@@ -349,7 +349,7 @@
                                             </span>
 
                                             <span class="stext-102 cl6 size-206">
-                                                {{ $product->material }}
+                                                {{ $product->materials }}
                                             </span>
                                         </li>
 

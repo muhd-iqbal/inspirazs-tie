@@ -44,6 +44,8 @@ class OrderController extends Controller
             ]);
         }
 
+        Cart::clear();
+
         return redirect("/o/$hash/$order->id");
     }
 
