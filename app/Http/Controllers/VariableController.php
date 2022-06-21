@@ -29,4 +29,8 @@ class VariableController extends Controller
 
         return back();
     }
+
+    public function list () {
+        return view('admin.vars', ['vars' => Variable::orderBy('name')->get()]);
+    }
 }

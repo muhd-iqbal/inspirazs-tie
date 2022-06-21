@@ -3,6 +3,27 @@
         tfoot td:nth-child(2) {
             border-left: 1px solid #e9ecef
         }
+
+        .modal-dialog {
+            position: fixed;
+            top: auto;
+            right: auto;
+            left: auto;
+            bottom: 0;
+        }
+
+        td,
+        th {
+            border: 1px solid #d1d1d1;
+            padding: 0.5em 1em 0.5em 1em;
+        }
+
+        th {
+            font-size: 80%;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+        }
     </style>
     <script src="https://www.google.com/recaptcha/api.js"></script>
 
@@ -24,23 +45,23 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body p-0">
-                        <div class="row p-5 pb-2">
+                    <div class="card-body p-5">
+                        <div class="row pb-2">
                             <div class="col-md-6">
                                 <img class="h-50" src="{{ asset('images/icons/logo-updated.png') }}">
                             </div>
 
                             <div class="col-md-6 text-right">
                                 <p class="font-weight-bold mb-1">Pesanan #{{ $order->id }}</p>
-                                {{-- <p class="text-muted">Due to: 4 Dec, 2019</p> --}}
+                                <button class="btn btn-info" onclick="location.href='/pdf'">Muat Turun LO</button>
                             </div>
                         </div>
 
                         <hr />
 
-                        <div class="row pb-5 p-5 pt-2">
+                        <div class="row pb-5 pt-2">
                             <div class="col-md-6">
-                                <p class="font-weight-bold mb-4">Kepada:</p>
+                                <p class="font-weight-bold mb-2">Kepada:</p>
                                 @if ($order->customer_organisation)
                                     <p class="mb-1 h5 font-weight-bold">{{ $order->customer_organisation }}</p>
                                 @else
@@ -57,23 +78,78 @@
                                 @endif
                             </div>
 
-                            <div class="col-md-6 text-right">
+                            <div class="col-md-6 text-md-right mt-5 mt-md-0">
                                 @if ($order->method == 'cash')
-                                    <p class="font-weight-bold mb-4">Kaedah Pembayaran</p>
-                                    <form action="/pay/{{ $order->id }}">
-                                        <select name="method" id="method" class="btn btn-light">
-                                            <option value="fpx">FPX - ToyyibPay</option>
-                                            <option value="transfer">Pemindahan Bank</option>
-                                            <option value="cash">Tunai di Kedai</option>
-                                        </select>
-                                        <button type="submit" class="btn btn-info">Bayar</button>
-                                    </form>
-                                    <p class="mb-1"><span class="text-muted">VAT: </span> 1425782</p>
-                                    <p class="mb-1"><span class="text-muted">VAT ID: </span> 10253642</p>
-                                    <p class="mb-1"><span class="text-muted">Payment Type: </span> Root
-                                    </p>
-                                    <p class="mb-1"><span class="text-muted">Name: </span> John Doe</p>
+                                    <p class="font-weight-bold mb-2">Kaedah Pembayaran</p>
+                                    @unless($order->payment_method)
+                                        <form action="/pay/{{ $order->id }}">
+                                            <select name="method" id="method" class="btn btn-light">
+                                                <option value="fpx">FPX - ToyyibPay</option>
+                                                <option value="transfer">Pemindahan Bank</option>
+                                                <option value="hand">Tunai di Kedai</option>
+                                            </select>
+                                            <button type="submit" class="btn btn-info">Bayar</button>
+                                        </form>
+                                    @endunless
+                                    <form action="/o/{{ $order->hash }}/{{ $order->id }}/change-payment-method"
+                                        method="POST" id="change-pay-method">@csrf</form>
+                                    @switch($order->payment_method)
+                                        @case('fpx')
+                                            <p class="mb-2">FPX / Online Transaction: </p>
+                                            <div class="d-md-flex justify-content-end">
+                                                @if ($order->grand_total != $order->paid)
+                                                    <a href="{{ env('TOYYIBPAY_LINK') . $order->toyyibpay_billcode }}"
+                                                        class="btn btn-warning">Buat Bayaran</a>
+                                                @else
+                                                    <a href="{{ env('TOYYIBPAY_LINK') . $order->toyyibpay_billcode }}"
+                                                        class="btn btn-warning" target="_blank">Lihat Bayaran</a>
+                                                @endif
+                                            </div>
+                                        @break
+
+                                        @case('transfer')
+                                            <p class="mb-2">Pemindahan Bank: </p>
+                                            <div class="justify-content-end mb-2">
+                                                <p> Sila buat pemindahan ke akaun:</p>
+                                                <p>
+                                                    {{ $web_var['company_bank_acc'] }}
+                                                </p>
+                                                <p>
+                                                    {{ $web_var['company_name'] }}
+                                                </p>
+                                                Rujukan: <strong>Tie #{{ $order->id }}</strong>
+                                            </div>
+                                        @break
+
+                                        @case('hand')
+                                            <p class="mb-2">Tunai di Kedai: </p>
+                                            <div class="justify-content-end mb-2">
+                                                <p> Sila buat pembayaran di kedai kami:</p>
+                                                <p>
+                                                    {{ $web_var['company_name'] }}
+                                                </p>
+                                                <p>
+                                                    {{ $web_var['company_address'] }}
+                                                </p>
+                                                <p>
+                                                    {{ $web_var['company_address_2'] }}
+                                                </p>
+                                                <p>
+                                                    {{ $web_var['company_postcode'] . ', ' . $web_var['company_city'] . ', ' . $web_var['company_state'] }}
+                                                </p>
+                                            </div>
+                                        @break
+
+                                        @default
+                                    @endswitch
                                 @endif
+
+                                @if ($order->grand_total != $order->paid && $order->payment_method != null)
+                                    <button type="submit" form="change-pay-method" class="btn btn-danger mt-2">Tukar
+                                        Kaedah Pembayaran</button>
+                                @endif
+
+
                                 @if ($order->method == 'loan')
                                     <div class="font-weight-bold mb-4">
                                         Bayar Kepada:
@@ -97,18 +173,18 @@
                             </div>
                         </div>
 
-                        <div class="row p-5">
+                        <div class="row mb-5">
                             <div class="col-md-12 table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="border-0 text-uppercase small font-weight-bold">#</th>
-                                            <th class="border-0 text-uppercase small font-weight-bold">Produk</th>
-                                            <th class="border-0 text-uppercase small font-weight-bold text-center">
+                                            <th class="text-uppercase">#</th>
+                                            <th class="text-uppercase">Produk</th>
+                                            <th class="text-uppercase text-center">
                                                 Kuantiti</th>
-                                            <th class="border-0 text-uppercase small font-weight-bold text-center">Harga
+                                            <th class="text-uppercase text-center">Harga
                                                 (RM)</th>
-                                            <th class="border-0 text-uppercase small font-weight-bold text-right">Jumlah
+                                            <th class="text-uppercase text-right">Jumlah
                                                 (RM)</th>
                                         </tr>
                                     </thead>
@@ -139,36 +215,38 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                @if ($order->payment->count())
-
-                                    <div>Senarai Pembayaran</div>
-                                    <div class="table-responsive">
-                                        <table class="w-100">
-                                            <thead>
-                                                <tr>
-                                                    <td>#</td>
-                                                    <td>Masa</td>
-                                                    <td>ID Rujukan</td>
-                                                    <td>Cara Bayaran</td>
-                                                    <td>Amaun</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($order->payment as $pay)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $pay->time }}</td>
-                                                        <td>{{ $pay->reference }}</td>
-                                                        <td>{{ $pay->method }}</td>
-                                                        <td>{{ $pay->amount }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                @endif
                             </div>
                         </div>
+                        @if ($order->payment->count())
+                            <div class="w-100 text-center">
+                                <div class="h5">Senarai Pembayaran</div>
+                                <div class="table-responsive">
+                                    <table class="w-100 border-collapse">
+                                        <thead class="border font-weight-bold">
+                                            <tr>
+                                                <th class="py-2 text-center">#</th>
+                                                <th>Masa</th>
+                                                <th>ID Rujukan</th>
+                                                <th>Cara Bayaran</th>
+                                                <th>Amaun</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($order->payment as $pay)
+                                                <tr>
+                                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                                    <td>{{ date('d-m-Y H:i A', strtotime($pay->time)) }}</td>
+                                                    <td>{{ $pay->reference }}</td>
+                                                    <td>{{ $pay->method }}</td>
+                                                    <td>RM{{ RM($pay->amount) }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        @endif
+
 
                         {{-- <div class="d-flex flex-row-reverse p-4">
                             <div class="py-3 px-5 text-right">
@@ -195,8 +273,8 @@
                 href="http://totoprayogo.com">totoprayogo.com</a></div>
 
     </div>
-
-
-
+    @if (session('alert'))
+        <x-alert-modal alert="{{ session('alert') }}" style="" />
+    @endif
 
 </x-layout>

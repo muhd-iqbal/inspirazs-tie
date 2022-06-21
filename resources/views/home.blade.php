@@ -1,7 +1,7 @@
 <x-layout>
 
     <!-- Slider -->
-    <x-main-slider />
+    <x-main-slider :sliders="$sliders" />
 
     <!-- Banner -->
     {{-- <x-section-banner :categories="$categories" /> --}}

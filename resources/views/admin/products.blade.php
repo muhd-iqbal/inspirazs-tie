@@ -5,9 +5,9 @@
     <section class="mb-4">
         <div class="card">
             <div class="card-header text-center py-3">
-                <h5 class="mb-0 text-center">
-                    <strong>Latest Orders</strong>
-                </h5>
+                <h3 class="mb-0 text-center">
+                    <strong>List Products</strong>
+                </h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -23,7 +23,7 @@
                             @foreach ($products as $prod)
                                 <tr onclick="location.href='/admin/product/{{ $prod->id }}'" role="button">
                                     <th scope="row">{{ $prod->name }}</th>
-                                    <td>{{ $prod->slug }}</td>
+                                    <td>{{ $prod->category->name }}</td>
                                     <td>{{ $prod->active }}</td>
                                 </tr>
                             @endforeach
@@ -37,15 +37,21 @@
     <!--Section: List Categories -->
     <section>
         <div class="text-center">
+            @if (count($errors) > 0)
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        @endif
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
                 Add Product
             </button>
-            @error('name')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
         </div>
 
         <!-- Modal -->
@@ -56,7 +62,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
                         <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="/admin/products" method="POST">
+                    <form action="/admin/products" method="POST" enctype="multipart/form-data">
                         <div class="modal-body">
                             @csrf
                             {{-- <div class="row mb-4">
@@ -77,13 +83,13 @@
                             <!-- Text input -->
                             <label class="form-label" for="name">Name</label>
                             <div class="form-outline mb-4">
-                                <input type="text" id="name" name="name" class="form-control" />
+                                <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}" />
                             </div>
 
                             <!-- Text input -->
                             <label class="form-label" for="picture">Picture (recommend 1200px x 1485px)</label>
                             <div class="form-outline mb-4">
-                                <input type="file" class="form-control" id="picture" />
+                                <input type="file" class="form-control" id="picture" name="picture" value="{{ old('picture') }}" />
                             </div>
 
                             <!-- Email input -->

@@ -24,4 +24,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+
+    public function slider()
+    {
+        return $this->hasOne(Slider::class);
+    }
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ToyyibpayController extends Controller
 {
@@ -14,7 +16,7 @@ class ToyyibpayController extends Controller
     {
         if ($order->toyyibpay_billcode) {
 
-            return redirect($this->toyyibpay_link . $order->toyyibpay_billcode);
+            return redirect(env('TOYYIBPAY_LINK') . $order->toyyibpay_billcode);
         } else {
 
             $data = array(
@@ -38,13 +40,13 @@ class ToyyibpayController extends Controller
                 'billChargeToCustomer' => 1,
             );
 
-            $url = $this->toyyibpay_link . 'index.php/api/createBill';
+            $url = env('TOYYIBPAY_LINK') . 'index.php/api/createBill';
 
             $response = Http::asForm()->post($url, $data);
 
-            $order->update(['toyyibpay_billcode' => $response[0]['BillCode'], 'payment_method' => 'fpx']);
+            $order->update(['toyyibpay_billcode' => $response[0]['BillCode']]);
 
-            return redirect($this->toyyibpay_link . $response[0]['BillCode']);
+            return redirect(env('TOYYIBPAY_LINK') . $response[0]['BillCode']);
         }
         // $curl = curl_init();
         // curl_setopt($curl, CURLOPT_POST, 1);
@@ -59,14 +61,49 @@ class ToyyibpayController extends Controller
         // echo $result;
     }
 
-    public function status()
+    public function status(Request $request)
     {
+        $order = Order::find($request->order_id);
+
+        switch ($request->status_id) {
+            case 1:
+                Order::where('id', $order->id)->update(['paid'=>$order->grand_total]);
+                Payment::create([
+                    'order_id' => $request->order_id,
+                    'reference' => $request->transaction_id,
+                    'amount' => Order::find($request->order_id)->grand_total,
+                    'method' => 'fpx-toyyibpay',
+                    'time' => NOW(),
+                ]);
+
+                return redirect("/o/$order->hash/$order->id")->with('alert', 'Pembayaran berjaya.');
+                break;
+            case 2:
+                return redirect("/o/$order->hash/$order->id")->with('alert', 'Pembayaran belum selesai. Menunggu pengesahan bank.');
+                break;
+            case 3:
+                return redirect("/o/$order->hash/$order->id")->with('alert', 'Pembayaran tidak berjaya. Sila cuba lagi.');
+                break;
+        }
+
+        if ($request->status_id == 1) {
+        }
+
         return $response = request()->all(['status_id', 'billcode', 'order_id']);
     }
 
-    public function callback()
+    public function callback(Request $request)
     {
+        //if ($request->status == 1) {
+        Payment::create([
+            'order_id' => $request->order_id,
+            'reference' => $request->refno,
+            'amount' => $request->amount,
+            'method' => 'fpx-toyyibpay',
+            'time' => $request->transaction_time,
+        ]);
+        //}
         $response = request()->all(['refno', 'status', 'reason', 'billcode', 'order_id', 'amount']);
-        Order::where('');
+        Log::info($response);
     }
 }

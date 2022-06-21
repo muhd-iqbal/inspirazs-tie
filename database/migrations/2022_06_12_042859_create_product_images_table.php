@@ -19,6 +19,15 @@ return new class extends Migration
             $table->string('path');
             $table->timestamps();
         });
+
+        Schema::table('orders', function (Blueprint $table){
+            $table->date('date')->nullable();
+        });
+
+        Schema::table('payments', function (Blueprint $table){
+            $table->string('attachment')->nullable()->after('time');
+        });
+
     }
 
     /**
@@ -28,6 +37,12 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('payments', function (Blueprint $table){
+            $table->dropColumn('attachment');
+        });
+        Schema::table('orders', function (Blueprint $table){
+            $table->dropColumn('date');
+        });
         Schema::dropIfExists('product_images');
     }
 };

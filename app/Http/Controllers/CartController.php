@@ -15,10 +15,18 @@ class CartController extends Controller
     {
         $list_price =  ProductPrice::select('loan', 'cash')->where('min', '<=', request('quantity'))->where('max', '>=', request('quantity'))->where('product_id', $product->id)->first();
 
-        $min = ProductPrice::where('product_id', $product->id)->orderBy('min', 'ASC')->first()->min;
+        $fr = ProductPrice::where('product_id', $product->id)->orderBy('min', 'ASC')->first();
+        $to = ProductPrice::where('product_id', $product->id)->orderBy('max', 'DESC')->first();
+        if ($fr && $to) {
+            $min = $fr->min;
+            $max = $to->max;
+        }
+        else{
+            $min = $max = 0;
+        }
 
         $attr = request()->validate([
-            'quantity' => 'required|numeric|min:' . $min,
+            'quantity' => "required|numeric|min:$min|max:$max",
         ]);
 
         if (session('loan')) {
@@ -107,5 +115,12 @@ class CartController extends Controller
         Cart::clear();
 
         return back()->with('success', 'Troli Dikosongkan.');
+    }
+
+    public function remove($cart)
+    {
+        Cart::remove($cart);
+
+        return back()->with('success', 'Troli Dikemaskini');
     }
 }

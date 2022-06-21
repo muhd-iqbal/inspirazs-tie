@@ -1,5 +1,5 @@
 <x-layout header="header-v4">
-    <x-title-page title="Troli" />
+    <x-title-page title="Cara Pesanan" />
     <!-- breadcrumb -->
     <div class="container mb-3">
         <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -9,7 +9,7 @@
             </a>
 
             <span class="stext-109 cl4">
-                Troli
+                Cara Pesanan
             </span>
         </div>
     </div>

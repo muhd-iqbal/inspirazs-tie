@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,6 +28,9 @@ class HomeController extends Controller
     {
         return view('auth.dashboard',[
             'orders' => Order::latest()->paginate(10),
+            'order_all' => Order::all(),
+            'category_all' => ProductCategory::all(),
+            'product_all' => Product::all(),
         ]);
     }
 }

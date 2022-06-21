@@ -56,7 +56,6 @@
             box-shadow: none !important;
             outline-width: 0
         }
-
     </style>
     <script src="https://www.google.com/recaptcha/api.js"></script>
 
@@ -180,7 +179,7 @@
                                         <strong>Penghantaran</strong>
                                     </td>
                                     <td class="right">
-                                        {{ session('shipping_fees') > 0 ? 'RM' . RM(session('shipping_fees')) .'('. get_total_weight() / 1000 .'kg)' : 'Percuma melebihi ' . $web_var['free_shipping'] . ' unit' }}
+                                        {{ session('shipping_fees') > 0 ? 'RM' . RM(session('shipping_fees')) . '(' . get_total_weight() / 1000 . 'kg)' : 'Percuma melebihi ' . $web_var['free_shipping'] . ' unit' }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -197,6 +196,7 @@
                     </div>
                 </div>
                 <div class="text-center">
+                    <small class="text-danger">Pautan untuk pesanan anda akan dihantar ke emel diatas. <br>Sila semak bahagian spam jika tidak menerima emel.</small>
                     <form action="/checkout-confirm" method="POST" id="checkout-confirm" class="row g-3">
                         @csrf
                         <div class="col-12">

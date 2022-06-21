@@ -5,6 +5,7 @@
 <head>
     <title>{{ $title ? $title . ' ~ ' . env('APP_NAME') : env('APP_NAME') }}</title>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="{{ asset('images/icons/favicon.png') }}" />
@@ -164,6 +165,17 @@
     </script>
     <!--===============================================================================================-->
     <script src="{{ asset('js/main.js') }}"></script>
+    <!--===============================================================================================-->
+    @if (session('alert'))
+    <script>
+        $(document).ready(function() {
+            $("#alertModal").modal('show');
+        });
+        setTimeout(function() {
+            $('#alertModal').modal('hide')
+        }, 4000);
+    </script>
+    @endif
 
 </body>
 

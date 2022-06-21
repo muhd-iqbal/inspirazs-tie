@@ -21,6 +21,11 @@ class ProductController extends Controller
     {
         $product = Product::with('prices')->where('slug', '=', $slug)->first();
 
+
+        if ($product->active == 0) {
+            return redirect('/')->with('error', 'Tiada Produk');
+        }
+
         return view('product', [
             'product' => Product::with(['prices', 'category'])->where('slug', '=', $slug)->first(),
             'prices' => ProductPrice::where('product_id', $product->id)->orderBy('min', 'ASC')->get(),
@@ -33,17 +38,31 @@ class ProductController extends Controller
         $attr = $request->validate([
             'name' => 'required|unique:products,name|max:255|min:5',
             'category_id' => 'required|exists:product_categories,id',
+            'picture' => 'required|image|max:10240'
         ]);
 
         $attr['slug'] = Str::slug($request->name);
+        $attr['price'] = 0;
+        $attr['active'] = 0;
 
-        Product::create($attr);
+        if ($request->hasFile('picture')) {
+            // $filenameWithExt    = $request->file('picture')->getClientOriginalName();
+            $filename           = $request->name;
+            $extension          = $request->file('picture')->getClientOriginalExtension();
+            $fileNameToStore    = $filename . '_' . time() . '.' . $extension;
+            $path               = $request->file('picture')->storeAs('public/products', $fileNameToStore);
+            $attr['picture'] = $fileNameToStore;
+        }
+
+        $pro = Product::create($attr);
+
+        return redirect('/admin/product/'.$pro->id);
     }
 
     public function list()
     {
         return view('admin.products', [
-            'products' => Product::with('category')->where('active', 1)->get(),
+            'products' => Product::with('category')->get(),
             'categories' => ProductCategory::where('featured', 1)->get(),
         ]);
     }
@@ -58,7 +77,7 @@ class ProductController extends Controller
     public function update(Product $product, Request $request)
     {
         $request->validate([
-            'name' => 'required|min:5|max:255',
+            'name' => "required|unique:products,name,$product->id,id|min:5|max:255",
             'price' => 'required|numeric',
             'keywords' => 'required',
             'weight' => 'required|integer',
@@ -71,7 +90,10 @@ class ProductController extends Controller
             'picture' => 'image',
         ]);
 
+
         $attr = $request->toArray();
+        $attr['slug'] = Str::slug($request->name);
+        $attr['price'] = $request->price * 100;
 
         if ($request->hasFile('picture')) {
             // $filenameWithExt    = $request->file('picture')->getClientOriginalName();
@@ -92,12 +114,4 @@ class ProductController extends Controller
         return back()->with('success', 'Product Updated');
     }
 
-    public function add_image(Product $product, Request $request)
-    {
-        $request->validate([
-            'photo' => 'required|image|max:10240',
-        ]);
-
-        return $product;
-    }
 }

@@ -46,29 +46,33 @@
                             <div class="wrap-slick3-arows flex-sb-m flex-w"></div>
 
                             <div class="slick3 gallery-lb">
-                                <div class="item-slick3" data-thumb="{{ asset('storage/products/'.$product->picture) }}">
+                                <div class="item-slick3"
+                                    data-thumb="{{ asset('storage/products/' . $product->picture) }}">
                                     <div class="wrap-pic-w pos-relative">
-                                        <img src="{{ asset('storage/products/'.$product->picture) }}" alt="IMG-PRODUCT">
+                                        <img src="{{ asset('storage/products/' . $product->picture) }}"
+                                            alt="IMG-PRODUCT">
 
                                         <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                            href="{{ asset('images/product-detail-01.jpg') }}">
+                                            href="{{ asset('storage/products/' . $product->picture) }}">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
                                 </div>
+                                @foreach ($product->images as $img)
+                                    <div class="item-slick3"
+                                        data-thumb="{{ asset('storage/products/' . $img->path) }}">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <img src="{{ asset('storage/products/' . $img->path) }}"
+                                                alt="IMG-PRODUCT">
 
-                                {{-- <div class="item-slick3" data-thumb="{{ asset('images/product-detail-02.jpg') }}">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="{{ asset('images/product-detail-02.jpg') }}" alt="IMG-PRODUCT">
-
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                            href="{{ asset('images/product-detail-02.jpg') }}">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                                href="{{ asset('storage/products/' . $img->path) }}">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="item-slick3" data-thumb="{{ asset('images/product-detail-03.jpg') }}">
+                                @endforeach
+                                {{-- <div class="item-slick3" data-thumb="{{ asset('images/product-detail-03.jpg') }}">
                                     <div class="wrap-pic-w pos-relative">
                                         <img src="{{ asset('images/product-detail-03.jpg') }}" alt="IMG-PRODUCT">
 
@@ -94,20 +98,28 @@
                         </span> --}}
 
                         <div class="stext-102 cl3 p-t-23">
-                            <table class="w-100 border border-collapsed">
-                                <tr class="bg-secondary text-light">
-                                    <th>Kuantiti</th>
-                                    <th>Harga Tunai (RM)</th>
-                                    <th>Harga LO (RM)</th>
-                                </tr>
-                                @foreach ($prices as $price)
-                                    <tr>
-                                        <td>{{ "$price->min - $price->max" }}</td>
-                                        <td>{{ RM($price->cash) }}</td>
-                                        <td>{{ RM($price->loan) }}</td>
+                            @if ($prices->count())
+                                <table class="w-100 border border-collapsed">
+                                    <tr class="bg-secondary text-light">
+                                        <th>Kuantiti</th>
+                                        <th>Harga Tunai (RM)</th>
+                                        <th>Harga LO (RM)</th>
                                     </tr>
-                                @endforeach
-                            </table>
+                                    @foreach ($prices as $price)
+                                        <tr>
+                                            <td>{{ "$price->min - $price->max" }}</td>
+                                            <td>{{ RM($price->cash) }}</td>
+                                            <td>{{ RM($price->loan) }}</td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            @else
+                                <div class="text-danger mb-2">
+                                    Pesanan tidak tersedia, sila hubungi kami melalui pautan dibawah.
+                                </div>
+                                <a href="/contact" class="btn btn-warning">Hubungi Kami</a>
+                            @endif
+
                         </div>
                         <p class="stext-102 cl3 p-t-23">
                             {!! $product->desc_short !!}
@@ -216,7 +228,7 @@
                                 @csrf
                                 <label for="quantity" class="text-left">Masukkan kuantiti</label>
                                 <div class="input-group mb-3">
-                                    <input type="number" name="quantity" class="form-control"
+                                    <input type="number" name="quantity" min="1" class="form-control"
                                         placeholder="Masukkan Kuantiti" aria-label="Masukkan Kuantiti"
                                         aria-describedby="basic-addon2"
                                         value="{{ Cart::get($product->id) ? Cart::get($product->id)->quantity : $prices->min('min') }}"

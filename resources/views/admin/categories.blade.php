@@ -5,9 +5,9 @@
     <section class="mb-4">
         <div class="card">
             <div class="card-header text-center py-3">
-                <h5 class="mb-0 text-center">
-                    <strong>Latest Orders</strong>
-                </h5>
+                <h3 class="mb-0 text-center">
+                    <strong>List Categories</strong>
+                </h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
