@@ -48,7 +48,7 @@
     <div class="top-bar">
         <div class="content-topbar flex-sb-m h-full container">
             <div class="left-top-bar">
-                Penghantaran percuma untuk pesanan melebihi 300 unit*
+            Penghantaran percuma untuk pesanan melebihi {{ $web_var['free_shipping'] }} unit*
             </div>
 
             <div class="right-top-bar flex-w h-full">
@@ -73,7 +73,7 @@
 
             <!-- Logo desktop -->
             <a href="/" class="logo">
-                <img src="{{ asset('images/icons/logo-updated.png') }}" alt="IMG-LOGO">
+                <img src="{{ asset('images/logo-2.png') }}" alt="IMG-LOGO">
             </a>
 
             <!-- Menu desktop -->
@@ -108,19 +108,19 @@
 
             <!-- Icon header -->
             <div class="wrap-icon-header flex-w flex-r-m">
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+                {{-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
                     <i class="zmdi zmdi-search"></i>
-                </div>
+                </div> --}}
 
                 <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
                     data-notify="{{ Cart::getContent()->count() }}">
                     <i class="zmdi zmdi-shopping-cart"></i>
                 </div>
 
-                <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
+                {{-- <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
                     data-notify="0">
                     <i class="zmdi zmdi-favorite-outline"></i>
-                </a>
+                </a> --}}
             </div>
         </nav>
     </div>
@@ -135,19 +135,19 @@
 
     <!-- Icon header -->
     <div class="wrap-icon-header flex-w flex-r-m m-r-15">
-        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+        {{-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
             <i class="zmdi zmdi-search"></i>
-        </div>
+        </div> --}}
 
         <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
             data-notify="{{ Cart::getContent()->count() }}">
             <i class="zmdi zmdi-shopping-cart"></i>
         </div>
 
-        <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
+        {{-- <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
             data-notify="0">
             <i class="zmdi zmdi-favorite-outline"></i>
-        </a>
+        </a> --}}
     </div>
 
     <!-- Button show menu -->
@@ -164,7 +164,7 @@
     <ul class="topbar-mobile">
         <li>
             <div class="left-top-bar">
-                Penghantaran percuma untuk pesanan melebihi 300 unit*
+                Penghantaran percuma untuk pesanan melebihi {{ $web_var['free_shipping'] }} unit*
             </div>
         </li>
 
@@ -220,7 +220,7 @@
     </ul>
 </div>
 
-<!-- Modal Search -->
+{{-- <!-- Modal Search -->
 <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
     <div class="container-search-header">
         <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
@@ -234,4 +234,4 @@
             <input class="plh3" type="text" name="search" placeholder="Carian...">
         </form>
     </div>
-</div>
+</div> --}}

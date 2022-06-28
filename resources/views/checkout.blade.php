@@ -1,4 +1,4 @@
-<x-layout header="header-v4">
+<x-layout header="header-v4" title="Tempahan: Maklumat Peribadi">
     <style>
         .card {
             padding: 30px 40px;
@@ -59,7 +59,7 @@
     </style>
     <script src="https://www.google.com/recaptcha/api.js"></script>
 
-    <x-title-page title="checkout" />
+    <x-title-page title="Maklumat Tempahan" />
     <!-- breadcrumb -->
     <div class="container">
         <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">

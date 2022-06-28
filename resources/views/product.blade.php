@@ -1,4 +1,4 @@
-<x-layout header="header-v4">
+<x-layout header="header-v4" title="{{ $product->name }}" :keywords="$product->keywords" :description="$product->desc_short">
     <style>
         th {
             text-align: center;

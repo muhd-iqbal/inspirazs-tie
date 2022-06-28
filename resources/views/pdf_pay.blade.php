@@ -1,9 +1,8 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Invois TaliLeher Inspirazs #{{ $order->id }}</title>
+    <title>Invois TaliLeher Inspirazs #{{ $payment }}</title>
 
     <style type="text/css">
         * {
@@ -49,7 +48,7 @@
 
 <body>
     <span style="float: right; color: lightslategray; font-weight: bold;">
-        INVOIS
+        RESIT
     </span>
     <div style="text-align: center; margin-bottom: 1.5rem;">
         <img src="{{ base_path() }}/public/images/logo-letterhead-2.png" width="60%" />
@@ -155,31 +154,6 @@
                 <td align="right">{{ RM($order->grand_total) }}</td>
             </tr>
         </tfoot>
-    </table>
-    <p style="margin-top: 3rem; text-align: center;">
-        Pembayaran
-    </p>
-    <table width="100%" class="list">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Tarikh</th>
-                <th>Rujukan</th>
-                <th>Cara Bayaran</th>
-                <th>Amaun</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($order->payment as $pay)
-                <tr align="center">
-                    <td>{{ $pay->id }}</td>
-                    <td>{{ date('d-m-Y', strtotime($pay->time)) }}</td>
-                    <td>{{ $pay->reference }}</td>
-                    <td>{{ $pay->method }}</td>
-                    <td>RM{{ RM($pay->amount) }}</td>
-                </tr>
-            @endforeach
-        </tbody>
     </table>
     <div style="padding: 2rem; font-size:.7rem; text-align:center;">
         Untuk sebarang pertanyaan sila hubungi nombor diatas atau En. Zamri (0174033135)

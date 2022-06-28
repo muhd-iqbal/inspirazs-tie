@@ -1,4 +1,4 @@
-<x-layout header="header-v4">
+<x-layout header="header-v4" title="Pesanan #{{ $order->id }}" robot="noindex">
     <style>
         tfoot td:nth-child(2) {
             border-left: 1px solid #e9ecef
@@ -26,8 +26,7 @@
         }
     </style>
     <script src="https://www.google.com/recaptcha/api.js"></script>
-
-    <x-title-page title="Invois Pesanan: {{ $order->id }}" />
+    <x-title-page title="Pesanan: #{{ $order->id }}" />
     <!-- breadcrumb -->
     <div class="container">
         <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -41,19 +40,27 @@
         </div>
     </div>
 
-    <div class="container p-t-15">
+    <div class="container p-t-15 p-b-100">
+        @if (session('alert'))
+            <div class="alert alert-info text-center">
+                {{ session('alert') }}
+            </div>
+        @endif
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body p-5">
-                        <div class="row pb-2">
+                        <div class="row pb-2" style="height: 100px;">
                             <div class="col-md-6">
-                                <img class="h-50" src="{{ asset('images/icons/logo-updated.png') }}">
+                                {{-- <img src="{{ asset('images/logo-2.png') }}"> --}}
                             </div>
-
                             <div class="col-md-6 text-right">
                                 <p class="font-weight-bold mb-1">Pesanan #{{ $order->id }}</p>
-                                <button class="btn btn-info" onclick="location.href='/pdf'">Muat Turun LO</button>
+                                {{-- @if ($order->method == 'loan') --}}
+                                    <button class="btn btn-info"
+                                        onclick="location.href='/o/{{ $order->hash }}/{{ $order->id }}/pdf'">Muat
+                                        Turun Invois</button>
+                                {{-- @endif --}}
                             </div>
                         </div>
 
@@ -155,18 +162,23 @@
                                         Bayar Kepada:
                                     </div>
                                     <div class="">
-                                        <div class="h4 font-weight-bold">{{ $web_var['company_name'] }}</div>
-                                        <div class="h6">{{ $web_var['company_ssm'] }}</div>
+                                        <div class="h4 font-weight-bold text-uppercase">{{ $web_var['company_name'] }}</div>
+                                        <div class="h6">SSM: {{ $web_var['company_ssm'] }}</div>
                                         <div class="h6">{{ $web_var['company_address'] }}</div>
-                                        <div>{{ $web_var['company_postcode'] }}, {{ $web_var['company_city'] }}
+                                        <div class="h6">{{ $web_var['company_address_2'] }}</div>
+                                        <div>{{ $web_var['company_postcode'] }},
+                                            {{ $web_var['company_city'] }}
                                         </div>
                                         <div>{{ $web_var['company_state'] }}</div>
                                     </div>
                                     <div class="mt-2">
 
                                         <div class="">
-                                            <div>No Akaun:</div>
+                                            <div><strong>No Akaun:</strong></div>
                                             <div> {{ $web_var['company_bank_acc'] }}</div>
+                                            {!! array_key_exists('company_bank_acc_2', $web_var->toArray()) ? '<div>' . $web_var['company_bank_acc_2'] .'</div>' : '' !!}
+                                            {!! array_key_exists('company_bank_acc_3', $web_var->toArray()) ? '<div>' . $web_var['company_bank_acc_3'] .'</div>' : '' !!}
+
                                         </div>
                                     </div>
                                 @endif
@@ -234,7 +246,7 @@
                                         <tbody>
                                             @foreach ($order->payment as $pay)
                                                 <tr>
-                                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                                    <td class="text-center">{{ $pay->id }}</td>
                                                     <td>{{ date('d-m-Y H:i A', strtotime($pay->time)) }}</td>
                                                     <td>{{ $pay->reference }}</td>
                                                     <td>{{ $pay->method }}</td>
@@ -268,13 +280,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="text-light mt-5 mb-5 text-center small">by : <a class="text-light" target="_blank"
-                href="http://totoprayogo.com">totoprayogo.com</a></div>
-
     </div>
-    @if (session('alert'))
-        <x-alert-modal alert="{{ session('alert') }}" style="" />
-    @endif
 
 </x-layout>

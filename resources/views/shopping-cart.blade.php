@@ -1,4 +1,4 @@
-<x-layout header="header-v4">
+<x-layout header="header-v4" title="Troli">
     <x-title-page title="Troli" />
     <!-- breadcrumb -->
     <div class="container mb-3">
@@ -98,7 +98,7 @@
                         </div>
                         <div class="text-danger small">
                             * Caj penghantaran akan dikira selepas pelanggan mengisi maklumat. Percuma untuk tempahan
-                            melebihi 300 unit.
+                            melebihi {{ $web_var['free_shipping'] }} unit.
                         </div>
                         {{-- <div class="size-208 w-full-ssm">
                                 <span class="stext-110 cl2">

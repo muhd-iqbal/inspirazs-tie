@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PaymentMail;
 use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class ToyyibpayController extends Controller
 {
@@ -48,62 +50,73 @@ class ToyyibpayController extends Controller
 
             return redirect(env('TOYYIBPAY_LINK') . $response[0]['BillCode']);
         }
-        // $curl = curl_init();
-        // curl_setopt($curl, CURLOPT_POST, 1);
-        // curl_setopt($curl, CURLOPT_URL, 'https://dev.toyyibpay.com/index.php/api/createBill');
-        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-
-        // $result = curl_exec($curl);
-        // $info = curl_getinfo($curl);
-        // curl_close($curl);
-        // $obj = json_decode($result);
-        // echo $result;
     }
 
     public function status(Request $request)
     {
         $order = Order::find($request->order_id);
+        $payment = Payment::where('reference', '=', $request->transaction_id)->first();
 
         switch ($request->status_id) {
             case 1:
-                Order::where('id', $order->id)->update(['paid'=>$order->grand_total]);
-                Payment::create([
-                    'order_id' => $request->order_id,
-                    'reference' => $request->transaction_id,
-                    'amount' => Order::find($request->order_id)->grand_total,
-                    'method' => 'fpx-toyyibpay',
-                    'time' => NOW(),
-                ]);
+                Order::where('id', $order->id)->update(['paid' => $order->grand_total]);
+                if ($payment === null) {
+                    $payment = Payment::create([
+                        'order_id' => $request->order_id,
+                        'reference' => $request->transaction_id,
+                        'amount' => Order::find($request->order_id)->grand_total,
+                        'method' => 'fpx-toyyibpay',
+                        'time' => NOW(),
+                    ]);
+                } else {
+                    $payment->update([
+                        'order_id' => $request->order_id,
+                        'reference' => $request->transaction_id,
+                        'amount' => Order::find($request->order_id)->grand_total,
+                        'method' => 'fpx-toyyibpay',
+                        'time' => NOW(),
+                    ]);
+                }
+
+                // Mail::to($order->customer_email)->send(new PaymentMail($payment));
 
                 return redirect("/o/$order->hash/$order->id")->with('alert', 'Pembayaran berjaya.');
                 break;
             case 2:
-                return redirect("/o/$order->hash/$order->id")->with('alert', 'Pembayaran belum selesai. Menunggu pengesahan bank.');
+                return redirect("/o/$order->hash/$order->id")->with('alert', 'Menunggu pengesahan bank, sila semak semula sebentar lagi.');
                 break;
             case 3:
                 return redirect("/o/$order->hash/$order->id")->with('alert', 'Pembayaran tidak berjaya. Sila cuba lagi.');
                 break;
         }
-
-        if ($request->status_id == 1) {
-        }
-
-        return $response = request()->all(['status_id', 'billcode', 'order_id']);
     }
 
     public function callback(Request $request)
     {
-        //if ($request->status == 1) {
-        Payment::create([
-            'order_id' => $request->order_id,
-            'reference' => $request->refno,
-            'amount' => $request->amount,
-            'method' => 'fpx-toyyibpay',
-            'time' => $request->transaction_time,
-        ]);
-        //}
-        $response = request()->all(['refno', 'status', 'reason', 'billcode', 'order_id', 'amount']);
-        Log::info($response);
+        $order = Order::find($request->order_id);
+        $payment = Payment::where('reference', '=', $request->refno)->first();
+
+        if ($request->status == 1) {
+            Order::where('id', $order->id)->update(['paid' => $order->grand_total]);
+            if ($payment === null) {
+                $payment = Payment::create([
+                    'order_id' => $request->order_id,
+                    'reference' => $request->refno,
+                    'amount' => $request->amount,
+                    'method' => 'fpx-toyyibpay',
+                    'time' => $request->transaction_time,
+                ]);
+            } else {
+                $payment->update([
+                    'order_id' => $request->order_id,
+                    'reference' => $request->refno,
+                    'amount' => $request->amount,
+                    'method' => 'fpx-toyyibpay',
+                    'time' => $request->transaction_time,
+                ]);
+            }
+            Mail::to($order->customer_email)->send(new PaymentMail($order, $payment));
+            // Mail::to($order->customer_email)->send(new PaymentMail($payment));
+        }
     }
 }

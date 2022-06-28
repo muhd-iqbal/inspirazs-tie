@@ -1,4 +1,5 @@
-<x-layout header="header-v4">
+<x-layout header="header-v4" title="Tentang Kami" keywords="tentang inspirazs, tali leher, tie, visi, misi"
+    description="Tentang Inspirazs Sdn. Bhd. Pembekal Tali Leher Terkemuka Seluruh Malaysia">
 
     <!-- Title page -->
     <x-title-page title="Tentang Inspirazs" />
@@ -59,7 +60,7 @@
                             Didorong oleh moto “Freely Designed”, kami sentiasa berusaha untuk menyediakan produk
                             berkualiti tinggi yang akan memberikan manfaat maksimum kepada pelanggan.
                         </p>
-                            <p class="stext-113 cl6 p-b-26">
+                        <p class="stext-113 cl6 p-b-26">
                             Di bawah kepimpinan yang cemerlang, kukuh dan berdedikasi pasukan pengurusan syarikat
                             Inspirazs Sdn. Bhd. bergerak pantas ke hadapan untuk menjadi sebuah syarikat percetakan
                             terkemuka di Malaysia.
@@ -82,7 +83,7 @@
                 <div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30">
                     <div class="how-bor2">
                         <div class="hov-img0">
-                            <img src="images/about-02.jpg" alt="IMG">
+                            <img src="images/about-03.jpg" alt="IMG">
                         </div>
                     </div>
                 </div>

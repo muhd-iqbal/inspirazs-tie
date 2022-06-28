@@ -33,17 +33,17 @@
                     </a>
                     <a href="/admin/categories"
                         class="list-group-item list-group-item-action py-2 ripple {{ str_contains(request()->path(), 'categories') ? 'active' : '' }}"><i
-                            class="fas fa-lock fa-fw me-3"></i><span>Category</span></a>
+                            class="fas fa-list fa-fw me-3"></i><span>Category</span></a>
                     <a href="/admin/products"
                         class="list-group-item list-group-item-action py-2 ripple {{ str_contains(request()->path(), 'product') ? 'active' : '' }}"><i
-                            class="fas fa-chart-line fa-fw me-3"></i><span>Product</span></a>
+                            class="fas fa-tshirt fa-fw me-3"></i><span>Product</span></a>
                     <a href="/admin/orders"
                         class="list-group-item list-group-item-action py-2 ripple {{ str_contains(request()->path(), 'order') ? 'active' : '' }}">
                         <i class="fas fa-chart-pie fa-fw me-3"></i><span>Orders</span>
                     </a>
                     <a href="/admin/sliders"
                         class="list-group-item list-group-item-action py-2 ripple {{ str_contains(request()->path(), 'slider') ? 'active' : '' }}">
-                        <i class="fas fa-chart-pie fa-fw me-3"></i><span>Sliders</span>
+                        <i class="fab fa-slideshare fa-fw me-3"></i><span>Sliders</span>
                     </a>
                     <a href="/admin/variables" class="list-group-item list-group-item-action py-2 ripple {{ str_contains(request()->path(), 'var') ? 'active' : '' }}"><i
                             class="fas fa-pen-fancy fa-fw me-3"></i><span>Web Variables</span></a>
@@ -71,7 +71,7 @@
 
                 <!-- Brand -->
                 <a class="navbar-brand" href="/admin">
-                    <img src="{{ asset('images/icons/logo-updated.png') }}" height="25" alt=""
+                    <img src="{{ asset('images/logo-2.png') }}" height="25" alt=""
                         loading="lazy" />
                 </a>
 

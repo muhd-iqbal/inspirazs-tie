@@ -162,7 +162,7 @@
                                 @csrf
                                 <div class="form-outline mb-4">
                                     <input type="text" id="amount" name="amount" class="form-control"
-                                        value="{{ old('amount') ? old('amount') : RM($order->grand_total - $order->paid) }}"
+                                        value="{{ old('amount') ? old('amount') : number_format(($order->grand_total - $order->paid) / 100, 2, '.', '') }}"
                                         required />
                                     <label class="form-label" for="amount">Amount</label>
                                 </div>
@@ -217,7 +217,7 @@
                         <tbody>
                             @foreach ($order->payment as $pay)
                                 <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $pay->id }}</td>
                                     <td>{{ date('d-m-Y H:i A', strtotime($pay->time)) }}</td>
                                     <td>{{ $pay->reference }}</td>
                                     <td>{{ $pay->method }}</td>

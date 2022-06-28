@@ -4,11 +4,11 @@
     <div class="p-5 bg-white">
 
         <div class="d-flex justify-content-between">
-            <h2>Produk ID: {{ $product->id }} <a href="/admin/products"
-                class="btn btn-warning">Kembali</a></h2>
-                <button onclick="window.open('/product/{{ $product->slug }}','_blank')" target="_blank" class="btn btn-info">Lihat</a>
-            <button onclick="location.href='/admin/product/{{ $product->id }}/price'" class="btn btn-info">Update
-                Price</button>
+            <h2>Produk ID: {{ $product->id }} <a href="/admin/products" class="btn btn-warning">Kembali</a></h2>
+            <button onclick="window.open('/product/{{ $product->slug }}','_blank')" target="_blank"
+                class="btn btn-info">Lihat</a>
+                <button onclick="location.href='/admin/product/{{ $product->id }}/price'" class="btn btn-info">Update
+                    Price</button>
 
         </div>
         @if (count($errors) > 0)
@@ -22,8 +22,7 @@
                 </div>
             </div>
         @endif
-        <form class="" method="POST" action="/admin/product/{{ $product->id }}"
-            enctype="multipart/form-data">
+        <form class="" method="POST" action="/admin/product/{{ $product->id }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="row my-4">
@@ -43,7 +42,11 @@
                 </div>
             </div>
 
-            <!-- Text input -->
+            <div class="form-outline mb-4">
+                <input type="text" id="desc_short" name="desc_short" class="form-control"
+                    value="{{ old('desc_short') ? old('desc_short') : $product->desc_short }}" required />
+                <label class="form-label" for="desc_short">Short Description *</label>
+            </div>
             <div class="form-outline mb-4">
                 <input type="text" id="keywords" name="keywords" class="form-control"
                     value="{{ old('keywords') ? old('keywords') : $product->keywords }}" required />
@@ -99,25 +102,50 @@
                 </div>
             </div>
 
-            <small class="mb-4 text-danger">Generate html, copy dan paste here. <a href="https://wordtohtml.net/"
-                    target="_blank">CLICK HERE</a></small>
 
-            <div class="form-outline mb-4">
+            {{-- <div class="form-outline mb-4">
                 <textarea class="form-control" id="desc_short" name="desc_short" rows="4">{{ old('desc_short') ? old('desc_short') : $product->desc_short }}</textarea>
                 <label class="form-label" for="desc_short">Short Description</label>
-            </div>
+            </div> --}}
 
+            <small class="mb-4 text-danger">Generate html, copy dan paste here. <a href="https://wordtohtml.net/"
+                    target="_blank">CLICK HERE</a></small>
             <div class="form-outline mb-4">
                 <textarea class="form-control" id="desc_long" name="desc_long" rows="4">{{ old('desc_long') ? old('desc_long') : $product->desc_long }}</textarea>
                 <label class="form-label" for="desc_long">Long Description</label>
             </div>
 
-            <small class="mb-4 text-danger">For optimum result use image resolution 1200px X 1485px</small>
+            <small class="mb-4 text-danger">For optimum result use square image, ie 1200px X 1200px / 1000px X
+                1000px</small>
 
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Featured Picture</h5>
+                            <button type="button" class="btn-close" data-mdb-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="{{ asset('storage/products/'. $product->picture) }}" alt="" class="w-100">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="mb-4">
-                <label class="form-label" for="image">Featured Picture * <a
-                        href="{{ asset('storage/products/' . $product->picture) }}" target="_blank">VIEW</a></label>
-                <input type="file" class="form-control" id="picture" name="picture" value="{{ $product->picture }}" />
+                <label class="form-label" for="image">Featured Picture *
+                    <button type="button" class="btn btn-secondary" data-mdb-toggle="modal"
+                        data-mdb-target="#exampleModal">
+                        View Current
+                    </button>
+                </label>
+                <input type="file" class="form-control" id="picture" name="picture"
+                    value="{{ $product->picture }}" />
             </div>
 
             <button type="submit" class="btn btn-primary btn-block mb-4">Update Product</button>

@@ -1,14 +1,36 @@
-@props(['header' => null, 'title' => null])
+@props(['header' => null, 'title' => null, 'keywords' => null, 'description' => null, 'robot' => 'index, follow'])
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms_MY">
 
 <head>
-    <title>{{ $title ? $title . ' ~ ' . env('APP_NAME') : env('APP_NAME') }}</title>
+    <title>{!! $title ? $title . ' &#126; ' . env('APP_NAME') : env('APP_NAME') . ' &#126; Tali Leher Berkualiti dengan Harga Borong' !!}</title>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name='description' property="og:description" itemprop='description'
+        content='{{ $description ? $description : 'Menyediakan perkhidmatan tempahan custom tali leher korporat, universiti, sekolah dll dengan harga borong.' }}' />
+    <meta name='keywords' property="og:keywords"
+        content='{{ $keywords ? $keywords : 'tali leher, tie, tie sekolah, tie korporat, tali leher universiti, school tie, tempahan tali leher, tie clip, tudung, scarf' }}' />
+    <meta name="robots" content="{{ $robot }}" />
+
+    <link rel="canonical" href="https://talileher.com/" />
+    <meta property="og:locale" content="ms_MY" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tali Leher Online &#126; Tali Leher Inspirazs &#126; Harga Borong" />
+    <meta property="og:url" content="https://talileher.com/" />
+    <meta property="og:site_name" content="Tali Leher Inspirazs" />
+    <meta property="article:publisher" content="https://www.facebook.com/inspirazs" />
+
+    <!--===============================================================================================-->
+
+    <meta name="google" content="nositelinkssearchbox" />
+    <meta name="googlebot" content="notranslate" />
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="{{ asset('images/icons/favicon.png') }}" />
+    <link rel="icon" href="{{ asset('images/icon.png') }}" sizes="32x32">
+    <link rel="icon" href="{{ asset('images/icon.png') }}" sizes="192x192">
+    <link rel="apple-touch-icon" href="{{ asset('images/icon.png') }}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <!--===============================================================================================-->
@@ -167,14 +189,14 @@
     <script src="{{ asset('js/main.js') }}"></script>
     <!--===============================================================================================-->
     @if (session('alert'))
-    <script>
-        $(document).ready(function() {
-            $("#alertModal").modal('show');
-        });
-        setTimeout(function() {
-            $('#alertModal').modal('hide')
-        }, 4000);
-    </script>
+        <script>
+            $(document).ready(function() {
+                $("#alertModal").modal('show');
+            });
+            setTimeout(function() {
+                $('#alertModal').modal('hide')
+            }, 4000);
+        </script>
     @endif
 
 </body>

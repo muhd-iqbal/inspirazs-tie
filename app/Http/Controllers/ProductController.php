@@ -85,7 +85,7 @@ class ProductController extends Controller
             'materials' => 'nullable|max:255',
             'size' => 'nullable|max:255',
             'active' => 'required|boolean',
-            'desc_short' => 'nullable',
+            'desc_short' => 'required',
             'desc_long' => 'nullable',
             'picture' => 'image',
         ]);

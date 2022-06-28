@@ -12,7 +12,7 @@ Sila klik butang ini untuk mengakses pesanan anda.
 Lihat Pesanan
 @endcomponent
 
-Untuk pembayaran tunai, anda boleh membuat bayaran di halaman tersebut.
+Untuk pembayaran melalui fpx (pemindahan atas talian), boleh dibuat di halaman tersebut.
 
 Klik/salin pautan ini jika butang diatas tidak berfungsi.
 <a href="{{ env('APP_URL') . '/o/' . $hash . '/' . $id }}" target="_blank">{{ env('APP_URL') . '/o/' . $hash . '/' . $id }}</a>

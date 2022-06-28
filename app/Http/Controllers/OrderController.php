@@ -76,9 +76,10 @@ class OrderController extends Controller
         view()->share('order', $order);
         $pdf = PDF::loadView('pdf', $order->toArray());
         // download PDF file with download method
-        return $pdf->download('pdf_file.pdf');
+        return $pdf->download('PDF');
     }
 
+    // customer's choice
     public function ch_pay_method(Request $request)
     {
         Cart::clear();

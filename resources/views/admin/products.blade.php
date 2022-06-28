@@ -87,7 +87,7 @@
                             </div>
 
                             <!-- Text input -->
-                            <label class="form-label" for="picture">Picture (recommend 1200px x 1485px)</label>
+                            <label class="form-label" for="picture">Picture (recommend square 1200px or 1000px)</label>
                             <div class="form-outline mb-4">
                                 <input type="file" class="form-control" id="picture" name="picture" value="{{ old('picture') }}" />
                             </div>

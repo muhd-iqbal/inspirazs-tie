@@ -53,6 +53,7 @@ Route::get('checkout-confirm', [CartController::class, 'checkout_confirm']);
 Route::post('checkout-confirm', [OrderController::class, 'add']);
 Route::get('/o/{hash}/{order}', [OrderController::class, 'view']);
 Route::get('/o/{hash}/{order}/pdf', [OrderController::class, 'createPDF']);
+Route::get('/o/{hash}/{order}/{payment}/pdf', [PaymentController::class, 'createPDF']);
 Route::post('/o/{hash}/{order}/change-payment-method', [OrderController::class, 'changePaymentMethod']);
 
 Route::get('pay/{order}', [OrderController::class, 'payment']);
@@ -91,8 +92,9 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::get('sliders', [SliderController::class, 'index']);
     Route::get('slider/{slider}', [SliderController::class, 'view']);
     Route::patch('slider/{slider}', [SliderController::class, 'update']);
+    Route::get('order/{order}/pay/{payment}', [PaymentController::class, 'email']);
 });
 
 //testing
-Route::get('mail', [MailController::class, 'order_view']);
-Route::get('mail/{order}', [MailController::class, 'order']);
+// Route::get('mail', [MailController::class, 'order_view']);
+// Route::get('mail/{order}', [MailController::class, 'order']);

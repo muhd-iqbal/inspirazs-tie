@@ -1,4 +1,4 @@
-<x-layout header="header-v4">
+<x-layout header="header-v4" title="Tempahan: Pengesahan">
     <style>
         .card {
             padding: 30px 40px;
@@ -97,7 +97,6 @@
             <div class="card-body">
                 <div class="row mb-4">
                     <div class="col-sm-6">
-                        <h6 class="mb-3">Maklumat:</h6>
 
                         <div>
                             @if (session('customer_organisation'))

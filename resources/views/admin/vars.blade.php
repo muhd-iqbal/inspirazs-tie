@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="p-5">
-        <a href="/admin">Back to dashboard</a>
+        <a href="/admin"><i class="fas fa-angle-double-left"></i> Back to dashboard</a>
         <div class="table-responsive mb-5">
             <table>
                 <tr>

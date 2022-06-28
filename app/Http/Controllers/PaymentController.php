@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PaymentMail;
 use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class PaymentController extends Controller
 {
@@ -20,7 +23,7 @@ class PaymentController extends Controller
 
         $attr = $request->toArray();
         $attr['order_id'] = $order->id;
-        $attr['amount'] = $request->amount*100;
+        $attr['amount'] = $request->amount * 100;
 
         if ($request->hasFile('attachment')) {
             // $filenameWithExt    = $request->file('picture')->getClientOriginalName();
@@ -43,5 +46,33 @@ class PaymentController extends Controller
         $payment->delete();
 
         return back();
+    }
+
+    public function email(Order $order, Payment $payment)
+    {
+        Mail::to($order->customer_email)->send(new PaymentMail($order, $payment));
+
+        return redirect("/admin/order/$order->id");
+    }
+
+    public function createPDF($hash, $order, $payment)
+    {
+        $order = Order::find($order);
+        $payment = Payment::find($payment);
+
+        if ($order == null || $payment == null) {
+            return redirect('/');
+        }
+
+        if ($order->id == $payment->order_id && $order->hash == $hash) {
+
+            view()->share('payment', $payment);
+            view()->share('order', $order);
+            $pdf = PDF::loadView('pdf_pay');
+            // download PDF file with download method
+            return $pdf->download('PDF');
+        } else {
+            return redirect('/');
+        }
     }
 }
