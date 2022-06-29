@@ -17,7 +17,7 @@
     <link rel="canonical" href="https://talileher.com/" />
     <meta property="og:locale" content="ms_MY" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Tali Leher Online &#126; Tali Leher Inspirazs &#126; Harga Borong" />
+    <meta property="og:title" content="{!! $title ? $title . ' &#126; ' . env('APP_NAME') : env('APP_NAME') . ' &#126; Tali Leher Berkualiti dengan Harga Borong' !!}" />
     <meta property="og:url" content="https://talileher.com/" />
     <meta property="og:site_name" content="Tali Leher Inspirazs" />
     <meta property="article:publisher" content="https://www.facebook.com/inspirazs" />

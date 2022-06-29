@@ -81,11 +81,6 @@
                 <ul class="main-menu">
                     <li class="{{ Request::path() == '/' ? 'active-menu':''}}">
                         <a href="/">Utama</a>
-                        {{-- <ul class="sub-menu">
-                            <li><a href="index.html">Homepage 1</a></li>
-                            <li><a href="home-02.html">Homepage 2</a></li>
-                            <li><a href="home-03.html">Homepage 3</a></li>
-                        </ul> --}}
                     </li>
 
                     <li class="label1 {{ Request::path() == 'products' ? 'active-menu':''}}" data-label1="hot">
@@ -108,19 +103,10 @@
 
             <!-- Icon header -->
             <div class="wrap-icon-header flex-w flex-r-m">
-                {{-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-                    <i class="zmdi zmdi-search"></i>
-                </div> --}}
-
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+                <div class="icon-header-item cl2 hov-cl1 trans-04 m-l-22 m-r-11 p-2 bor2 icon-header-noti js-show-cart bg-white"
                     data-notify="{{ Cart::getContent()->count() }}">
                     <i class="zmdi zmdi-shopping-cart"></i>
                 </div>
-
-                {{-- <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-                    data-notify="0">
-                    <i class="zmdi zmdi-favorite-outline"></i>
-                </a> --}}
             </div>
         </nav>
     </div>
@@ -130,24 +116,15 @@
 <div class="wrap-header-mobile">
     <!-- Logo moblie -->
     <div class="logo-mobile">
-        <a href="index.html"><img src="{{ asset('images/icons/logo-01.png') }}" alt="IMG-LOGO"></a>
+        <a href="/"><img src="{{ asset('images/icons/logo-01.png') }}" alt="IMG-LOGO"></a>
     </div>
 
     <!-- Icon header -->
     <div class="wrap-icon-header flex-w flex-r-m m-r-15">
-        {{-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-            <i class="zmdi zmdi-search"></i>
-        </div> --}}
-
         <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
             data-notify="{{ Cart::getContent()->count() }}">
             <i class="zmdi zmdi-shopping-cart"></i>
         </div>
-
-        {{-- <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
-            data-notify="0">
-            <i class="zmdi zmdi-favorite-outline"></i>
-        </a> --}}
     </div>
 
     <!-- Button show menu -->
@@ -188,27 +165,15 @@
     <ul class="main-menu-m">
         <li>
             <a href="/">Utama</a>
-            {{-- <ul class="sub-menu-m">
-                <li><a href="index.html">Homepage 1</a></li>
-                <li><a href="home-02.html">Homepage 2</a></li>
-                <li><a href="home-03.html">Homepage 3</a></li>
-            </ul>
-            <span class="arrow-main-menu-m">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-            </span> --}}
         </li>
 
         <li>
-            <a href="/product">Produk</a>
+            <a href="/products">Produk</a>
         </li>
 
         <li>
             <a href="/shopping-cart" class="label1 rs1" data-label1="hot">Troli</a>
         </li>
-
-        {{-- <li>
-            <a href="blog">Blog</a>
-        </li> --}}
 
         <li>
             <a href="/about">Kenali</a>
@@ -219,19 +184,3 @@
         </li>
     </ul>
 </div>
-
-{{-- <!-- Modal Search -->
-<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
-    <div class="container-search-header">
-        <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-            <img src="{{ asset('images/icons/icon-close2.png') }}" alt="CLOSE">
-        </button>
-
-        <form class="wrap-search-header flex-w p-l-15" action="/search">
-            <button class="flex-c-m trans-04">
-                <i class="zmdi zmdi-search"></i>
-            </button>
-            <input class="plh3" type="text" name="search" placeholder="Carian...">
-        </form>
-    </div>
-</div> --}}
