@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>{{ $title ? $title . ' ~ ' . env('APP_NAME') : env('APP_NAME') }}</title>
+    <title>{{ $title ? $title . ' ~ ' . config('app.name') : config('app.name') }}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->

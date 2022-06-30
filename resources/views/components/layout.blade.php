@@ -3,7 +3,7 @@
 <html lang="ms_MY">
 
 <head>
-    <title>{!! $title ? $title . ' &#126; ' . env('APP_NAME') : env('APP_NAME') . ' &#126; Tali Leher Berkualiti dengan Harga Borong' !!}</title>
+    <title>{!! $title ? $title . ' &#126; ' . config('app.name') : config('app.name') . ' &#126; Tali Leher Berkualiti dengan Harga Borong' !!}</title>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +17,7 @@
     <link rel="canonical" href="https://talileher.com/" />
     <meta property="og:locale" content="ms_MY" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="{!! $title ? $title . ' &#126; ' . env('APP_NAME') : env('APP_NAME') . ' &#126; Tali Leher Berkualiti dengan Harga Borong' !!}" />
+    <meta property="og:title" content="{!! $title ? $title . ' &#126; ' . config('app.name') : config('app.name') . ' &#126; Tali Leher Berkualiti dengan Harga Borong' !!}" />
     <meta property="og:url" content="https://talileher.com/" />
     <meta property="og:site_name" content="Tali Leher Inspirazs" />
     <meta property="article:publisher" content="https://www.facebook.com/inspirazs" />

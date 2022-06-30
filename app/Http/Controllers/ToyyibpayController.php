@@ -18,12 +18,12 @@ class ToyyibpayController extends Controller
     {
         if ($order->toyyibpay_billcode) {
 
-            return redirect(env('TOYYIBPAY_LINK') . $order->toyyibpay_billcode);
+            return redirect(config('tie.toyyibpay-lnk') . $order->toyyibpay_billcode);
         } else {
 
             $data = array(
-                'userSecretKey' => env('TOYYIBPAY_KEY'),
-                'categoryCode' => env('TOYYIBPAY_CATEGORY'),
+                'userSecretKey' => config('tie.toyyibpay-key'),
+                'categoryCode' => config('tie.toyyibpay-cat'),
                 'billName' => 'Pesanan Tali Leher: ' . $order->id,
                 'billDescription' => 'Bayaran untuk Pesanan Tali Leher Inspirazs.',
                 'billPriceSetting' => 0,
@@ -42,13 +42,13 @@ class ToyyibpayController extends Controller
                 'billChargeToCustomer' => 1,
             );
 
-            $url = env('TOYYIBPAY_LINK') . 'index.php/api/createBill';
+            $url = config('tie.toyyibpay-lnk') . 'index.php/api/createBill';
 
             $response = Http::asForm()->post($url, $data);
 
             $order->update(['toyyibpay_billcode' => $response[0]['BillCode']]);
 
-            return redirect(env('TOYYIBPAY_LINK') . $response[0]['BillCode']);
+            return redirect(config('tie.toyyibpay-lnk') . $response[0]['BillCode']);
         }
     }
 

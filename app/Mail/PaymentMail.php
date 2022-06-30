@@ -30,6 +30,6 @@ class PaymentMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Bayaran untuk Pesanan #'.$this->data['order']['id'].' - '. env('APP_NAME'))->markdown('emails.payment', $this->data);
+        return $this->subject('Bayaran untuk Pesanan #'.$this->data['order']['id'].' - '. config('app.name'))->markdown('emails.payment', $this->data);
     }
 }

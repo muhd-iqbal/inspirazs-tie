@@ -105,10 +105,10 @@
                                             <p class="mb-2">FPX / Online Transaction: </p>
                                             <div class="d-md-flex justify-content-end">
                                                 @if ($order->grand_total != $order->paid)
-                                                    <a href="{{ env('TOYYIBPAY_LINK') . $order->toyyibpay_billcode }}"
+                                                    <a href="{{ config('tie.toyyibpay-lnk') . $order->toyyibpay_billcode }}"
                                                         class="btn btn-warning">Buat Bayaran</a>
                                                 @else
-                                                    <a href="{{ env('TOYYIBPAY_LINK') . $order->toyyibpay_billcode }}"
+                                                    <a href="{{ config('tie.toyyibpay-lnk') . $order->toyyibpay_billcode }}"
                                                         class="btn btn-warning" target="_blank">Lihat Bayaran</a>
                                                 @endif
                                             </div>

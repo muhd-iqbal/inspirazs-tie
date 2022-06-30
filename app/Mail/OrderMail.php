@@ -28,6 +28,6 @@ class OrderMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Pesanan #'.$this->data['id'].' - '. env('APP_NAME'))->markdown('emails.order', $this->data);
+        return $this->subject('Pesanan #'.$this->data['id'].' - '. config('app.name'))->markdown('emails.order', $this->data);
     }
 }
