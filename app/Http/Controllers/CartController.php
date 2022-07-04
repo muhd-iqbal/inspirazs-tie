@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductAddon;
 use App\Models\ProductPrice;
 use App\Models\Variable;
 use Illuminate\Http\Request;
@@ -20,8 +21,7 @@ class CartController extends Controller
         if ($fr && $to) {
             $min = $fr->min;
             $max = $to->max;
-        }
-        else{
+        } else {
             $min = $max = 0;
         }
 
@@ -35,8 +35,19 @@ class CartController extends Controller
             $price = $list_price->cash;
         }
 
+        $product_name = $product->name;
+
+        if (request()->has('addon')) {
+            $addons = ProductAddon::whereIn('id', array_keys(request('addon')))->get();
+            foreach ($addons as $add) {
+                $product_name = $product_name . '<br><small>* ' . $add->name . '</small>';
+                $price += $add->price;
+            }
+        }
+
         if (Cart::has($product->id)) {
             Cart::update($product->id, array(
+                'name' => $product_name,
                 'price' => $price,
                 'quantity' => array(
                     'relative' => false,
@@ -47,7 +58,7 @@ class CartController extends Controller
         } else {
             Cart::add(array(
                 'id' => $product->id, // inique row ID
-                'name' => $product->name,
+                'name' => $product_name,
                 'price' => $price,
                 'quantity' => $attr['quantity'],
                 'attributes' => ['weight' => $product->weight * $attr['quantity']],

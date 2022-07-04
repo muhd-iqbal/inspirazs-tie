@@ -8,6 +8,10 @@
         td {
             border: 1px solid #e9ecef;
         }
+
+        .form-check-input {
+            margin-left: 0;
+        }
     </style>
     <!-- breadcrumb -->
     <div class="container">
@@ -127,105 +131,18 @@
 
                         <!--  -->
                         <div class="p-t-33">
-                            {{-- <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Kotak
-                                </div>
-
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Pilihan</option>
-                                            <option>Tidak</option>
-                                            <option>Sampul</option>
-                                            <option>Kotak</option>
-                                            <option>Kotak (Hot Stamping)</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Sapu Tangan
-                                </div>
-
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Tidak</option>
-                                            <option>Ya</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Tipping Logo
-                                </div>
-
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Tidak</option>
-                                            <option>Ya</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Logo Hadapan
-                                </div>
-
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Tidak</option>
-                                            <option>Ya</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Klip Tali Leher
-                                </div>
-
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Tidak</option>
-                                            <option>Ya</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Cufflink
-                                </div>
-
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Tidak</option>
-                                            <option>Ya</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div> --}}
 
                             <form action="/add-to-cart/{{ $product->id }}" method="POST">
                                 @csrf
+                                <div class="text-left"><strong>Tambahan: </strong></div>
+                                @foreach ($product->addon as $addon)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="addon-{{ $addon->id }}"
+                                            name="addon[{{ $addon->id }}]">
+                                        <label class="form-check-label text-left"
+                                            for="addon-{{ $addon->id }}">{{ $addon->name }} <small>(RM{{ RM($addon->price) }} seunit)</small></label>
+                                    </div>
+                                @endforeach
                                 <label for="quantity" class="text-left">Masukkan kuantiti</label>
                                 <div class="input-group mb-3">
                                     <input type="number" name="quantity" min="1" class="form-control"
@@ -234,7 +151,8 @@
                                         value="{{ Cart::get($product->id) ? Cart::get($product->id)->quantity : $prices->min('min') }}"
                                         required>
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="sumbit">Tambah ke Troli</button>
+                                        <button class="btn btn-outline-secondary" type="sumbit">Tambah ke
+                                            Troli</button>
                                     </div>
                                 </div>
                                 @if ($errors->any())
@@ -247,54 +165,7 @@
                                     </div>
                                 @endif
                             </form>
-                            {{-- <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-204 flex-w flex-m respon6-next">
-                                    <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-minus"></i>
-                                        </div>
-
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                            name="num-product" value="1">
-
-                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-plus"></i>
-                                        </div>
-                                    </div>
-
-                                    <button
-                                        class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                        Tambah Ke Troli
-                                    </button>
-                                </div>
-                            </div> --}}
                         </div>
-
-                        <!--  -->
-                        {{-- <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                            <div class="flex-m bor9 p-r-10 m-r-11">
-                                <a href="#"
-                                    class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-                                    data-tooltip="Add to Wishlist">
-                                    <i class="zmdi zmdi-favorite"></i>
-                                </a>
-                            </div>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                data-tooltip="Facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                data-tooltip="Twitter">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                data-tooltip="Google Plus">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -306,7 +177,8 @@
                     <ul class="nav nav-tabs" role="tablist">
                         @unless($product->desc_long == null)
                             <li class="nav-item p-b-10">
-                                <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
+                                <a class="nav-link active" data-toggle="tab" href="#description"
+                                    role="tab">Description</a>
                             </li>
                         @endunless
                         <li class="nav-item p-b-10">

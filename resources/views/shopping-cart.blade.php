@@ -44,8 +44,8 @@
                                                 </div>
                                             </a>
                                         </td>
-                                        <td class="text-center">
-                                            <a href="/product/{{ $row->model->slug }}">{{ $row->name }}</a>
+                                        <td class="text-left">
+                                            <a href="/product/{{ $row->model->slug }}">{!! $row->name !!}</a>
                                         </td>
                                         <td class="text-center">{{ RM($row->price) }}</td>
                                         <td class="text-center">{{ $row->quantity }}</td>
@@ -100,42 +100,6 @@
                             * Caj penghantaran akan dikira selepas pelanggan mengisi maklumat. Percuma untuk tempahan
                             melebihi {{ $web_var['free_shipping'] }} unit.
                         </div>
-                        {{-- <div class="size-208 w-full-ssm">
-                                <span class="stext-110 cl2">
-                                    Penghantaran:
-                                </span>
-                            </div>
-                            <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-                                <p class="stext-111 cl6 p-t-2">
-                                <div class="flex-w">
-                                    <input type="radio" class="" name="shipping_type" id="postage">
-                                    <label for="postage" class="p-l-10">GDEX</label>
-                                </div>
-                                <div class="flex-w">
-                                    <input type="radio" name="shipping_type" id="self-pickup">
-                                    <label for="self-pickup" class="p-l-10">Self Pickup</label>
-                                </div>
-                                </p>
-
-                                <div class="p-t-15">
-                                    <span class="stext-112 cl8">
-                                        Masukkan Poskod
-                                    </span>
-
-                                    <div class="bor8 bg0 m-b-22">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode"
-                                            placeholder="Poskod">
-                                    </div>
-
-                                    <div class="flex-w">
-                                        <div
-                                            class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-                                            Kemaskini
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div> --}}
                     </div>
 
                     <div class="flex-w flex-t p-t-27 p-b-33">

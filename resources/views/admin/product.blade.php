@@ -4,11 +4,12 @@
     <div class="p-5 bg-white">
 
         <div class="d-flex justify-content-between">
-            <h2>Produk ID: {{ $product->id }} <a href="/admin/products" class="btn btn-warning">Kembali</a></h2>
-            <button onclick="window.open('/product/{{ $product->slug }}','_blank')" target="_blank"
-                class="btn btn-info">Lihat</a>
-                <button onclick="location.href='/admin/product/{{ $product->id }}/price'" class="btn btn-info">Update
-                    Price</button>
+            <h2>Produk ID: {{ $product->id }}
+                <button onclick="window.open('/product/{{ $product->slug }}','_blank')" target="_blank"
+                    class="btn btn-info">Lihat</button></h2>
+                    <button onclick="location.href='/admin/product/{{ $product->id }}/addon'" class="btn btn-success">Product Addons?</button>
+                    <button onclick="location.href='/admin/product/{{ $product->id }}/price'" class="btn btn-info">Update
+                        Price</button>
 
         </div>
         @if (count($errors) > 0)
@@ -129,7 +130,8 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img src="{{ asset('storage/products/'. $product->picture) }}" alt="" class="w-100">
+                            <img src="{{ asset('storage/products/' . $product->picture) }}" alt=""
+                                class="w-100">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>

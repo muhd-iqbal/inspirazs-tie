@@ -86,45 +86,6 @@
 
             <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
                 <div class="m-l-25 m-r--38 m-lr-0-xl">
-                    <!-- Button trigger modal -->
-                    {{-- <div class="mb-2">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#existingModal">
-                            Pernah buat pesanan?
-                        </button>
-                    </div>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="existingModal" tabindex="-1" aria-labelledby="existingModalLabel"
-                        aria-hidden="true" style="z-index: 1111">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Masukkan maklumat anda.</h5>
-                                    <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="name">Nama Penuh</label>
-                                            <input type="name" class="form-control" id="name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Alamat Emel</label>
-                                            <input type="email" class="form-control" id="email">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Cari</button>
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Batal</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div> --}}
                     <div class="card">
                         <h5 class="text-center mb-4">Masukkan Maklumat Anda</h5>
                         <form class="form-card" action="/checkout" method="POST" id="checkout">
@@ -178,78 +139,11 @@
                     <div class="flex-w flex-t bor12 p-b-13">
                         @foreach (Cart::getContent() as $row)
                             <div>
-                                {{ $row->name . ' x ' . $row->quantity . ': RM' . RM($row->getPriceSum()) }}
+                                {!! $row->name . '<br>RM' .RM($row->price) .' x ' . $row->quantity . ': RM' . RM($row->getPriceSum()) .'<hr>' !!}
                             </div>
                         @endforeach
                     </div>
-                    {{-- <div class="flex-w flex-t bor12 p-b-13 pt-3">
-                            <div class="size-208">
-                                <span class="stext-110 cl2">
-                                    Subjumlah:
-                                </span>
-                            </div>
-
-                            <div class="size-209">
-                                <span class="mtext-110 cl2 m-2">
-                                    RM{{ RM(Cart::getSubTotal()) }}
-                                </span>
-                            </div>
-                        </div> --}}
-                    {{-- <div class="bor12 p-t-15 p-b-30">
-                            <div class="size-208 w-full-ssm">
-                                <span class="stext-110 cl2">
-                                    Penghantaran:
-                                </span>
-                            </div>
-
-                            <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-                                <p class="stext-111 cl6 p-t-2">
-                                <div class="flex-w">
-                                    <input type="radio" class="" name="shipping_type" id="postage">
-                                    <label for="postage" class="p-l-10">GDEX</label>
-                                </div>
-                                <div class="flex-w">
-                                    <input type="radio" name="shipping_type" id="self-pickup">
-                                    <label for="self-pickup" class="p-l-10">Self Pickup</label>
-                                </div>
-                                </p>
-
-                                <div class="p-t-15">
-                                    <span class="stext-112 cl8">
-                                        Masukkan Poskod
-                                    </span>
-
-                                    <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                                        <select class="js-select2" name="time">
-                                            <option>Select a country...</option>
-                                            <option>USA</option>
-                                            <option>UK</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-
-                                    <div class="bor8 bg0 m-b-12">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state"
-                                            placeholder="State /  country">
-                                    </div>
-
-                                    <div class="bor8 bg0 m-b-22">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode"
-                                            placeholder="Poskod">
-                                    </div>
-
-                                    <div class="flex-w">
-                                        <div
-                                            class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-                                            Kemaskini
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div> --}}
-
-                    <div class="flex-w flex-t p-t-27">
+                     <div class="flex-w flex-t p-t-27">
                         <div class="size-208">
                             <span class="mtext-101 cl2">
                                 Jumlah:
@@ -262,10 +156,6 @@
                             </span>
                         </div>
                     </div>
-
-                    {{-- <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                            Proceed to Checkout
-                        </button> --}}
                 </div>
             </div>
         </div>

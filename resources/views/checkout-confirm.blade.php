@@ -143,11 +143,11 @@
                         <tbody>
                             @foreach (Cart::getContent() as $row)
                                 <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-left strong">{{ $row->name }}</td>
-                                    <td class="text-center">{{ RM($row->price) }}</td>
-                                    <td class="text-center">{{ $row->quantity }}</td>
-                                    <td class="text-right">{{ RM($row->getPriceSum()) }}</td>
+                                    <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                    <td class="text-left strong">{!! $row->name !!}</td>
+                                    <td class="text-center align-middle">{{ RM($row->price) }}</td>
+                                    <td class="text-center align-middle">{{ $row->quantity }}</td>
+                                    <td class="text-right align-middle">{{ RM($row->getPriceSum()) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -165,7 +165,7 @@
                                     <td class="left">
                                         <strong>Subjumlah</strong>
                                     </td>
-                                    <td class="right">RM{{ RM(Cart::getSubtotal()) }}</td>
+                                    <td class="text-right">RM{{ RM(Cart::getSubtotal()) }}</td>
                                 </tr>
                                 {{-- <tr>
                                     <td class="left">
@@ -177,7 +177,7 @@
                                     <td class="left">
                                         <strong>Penghantaran</strong>
                                     </td>
-                                    <td class="right">
+                                    <td class="text-right">
                                         {{ session('shipping_fees') > 0 ? 'RM' . RM(session('shipping_fees')) . '(' . get_total_weight() / 1000 . 'kg)' : 'Percuma melebihi ' . $web_var['free_shipping'] . ' unit' }}
                                     </td>
                                 </tr>
@@ -185,7 +185,7 @@
                                     <td class="left">
                                         <strong>Jumlah</strong>
                                     </td>
-                                    <td class="right">
+                                    <td class="text-right">
                                         <strong>RM{{ RM(Cart::getSubtotal() + session('shipping_fees')) }}</strong>
                                     </td>
                                 </tr>

@@ -129,7 +129,7 @@
                     <tbody>
                         @foreach ($order->item as $item)
                             <tr>
-                                <td>{{ $item->product }}</td>
+                                <td>{!! $item->product !!}</td>
                                 <td class="text-end">{{ $item->quantity }}</td>
                                 <td class="text-end">{{ RM($item->price) }}</td>
                                 <td class="text-end">{{ RM($item->total) }}</td>
@@ -162,7 +162,7 @@
                                 @csrf
                                 <div class="form-outline mb-4">
                                     <input type="text" id="amount" name="amount" class="form-control"
-                                        value="{{ old('amount') ? old('amount') : number_format(($order->grand_total - $order->paid) / 100, 2, '.', '') }}"
+                                        value="{{ old('amount') ? old('amount') : RM($order->grand_total - $order->paid, '') }}"
                                         required />
                                     <label class="form-label" for="amount">Amount</label>
                                 </div>
@@ -228,13 +228,21 @@
                                                 target="_blank"><i class="fas fa-images"></i></a>
                                         @endif
                                     </td>
-                                    <td align="right" class="p-0 m-0">
+                                    <td align="right" class="p-0 m-0 d-flex">
+                                        <form action="/admin/order/{{ $order->id }}/pay/{{ $pay->id }}"
+                                            method="post">
+                                            @csrf
+                                            <button type="submit" class="btn shadow-none"
+                                                onclick="return confirm('Email payment: {{ $pay->reference }}?')" title="Email Payment To Customer">
+                                                <i class="fa fa-envelope"></i>
+                                            </button>
+                                        </form>
                                         <form action="/admin/order/{{ $order->id }}/{{ $pay->id }}"
                                             method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn shadow-none" title="Padam bayaran"
-                                                onclick="return confirm('Padam bayaran rujukan {{ $pay->reference }}?')">
+                                                onclick="return confirm('Delete payment {{ $pay->reference }}?')">
                                                 <i class="fas fa-trash" role="button"></i>
                                             </button>
                                         </form>

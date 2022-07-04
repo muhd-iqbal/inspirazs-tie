@@ -1,4 +1,12 @@
 @props(['sliders', 'trans' => ['fadeInDown', 'fadeInUp', 'zoomIn', 'rollIn', 'lightSpeedIn', 'slideInUp', 'rotateInDownLeft', 'rotateInUpRight', 'rotateIn']])
+<style>
+    @media (max-width: 1199px) {
+        #white-bg-sm {
+            background-color: #fff;
+        }
+
+    }
+</style>
 <section class="section-slide mb-5">
     <div class="wrap-slick1">
         <div class="slick1">
@@ -8,7 +16,7 @@
                         style="background-image: url({{ asset('storage/sliders/' . $slider->image) }}); background-position:right">
                         <div class="container h-full">
                             <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                                <div class="bg-white p-4 bor1">
+                                <div id="white-bg-sm" class="p-4 bor1">
                                     <div class="layer-slick1 animated visible-false"
                                         data-appear="{{ $trans[array_rand($trans)] }}" data-delay="0">
                                         <span class="ltext-101 cl2 respon2">

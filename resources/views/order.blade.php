@@ -219,7 +219,7 @@
                                         @foreach ($order->item as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->product }}</td>
+                                                <td>{!! $item->product !!}</td>
                                                 <td class="text-center">{{ $item->quantity }}</td>
                                                 <td class="text-center">{{ RM($item->price) }}</td>
                                                 <td class="text-right">{{ RM($item->total) }}</td>

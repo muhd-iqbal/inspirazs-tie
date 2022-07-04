@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductAddonController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImagesController;
@@ -78,6 +79,9 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::get('products', [ProductController::class, 'list']);
     Route::post('products', [ProductController::class, 'add']);
     Route::get('product/{product}', [ProductController::class, 'view']);
+    Route::get('product/{product}/addon', [ProductAddonController::class, 'view']);
+    Route::post('product/{product}/addon', [ProductAddonController::class, 'add']);
+    Route::patch('product/{product}/addon/{addon}', [ProductAddonController::class, 'patch']);
     Route::patch('product/{product}', [ProductController::class, 'update']);
     Route::post('product/{product}', [ProductImagesController::class, 'add']);
     Route::delete('product/{product}/{image}', [ProductImagesController::class, 'delete']);
@@ -92,7 +96,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::get('sliders', [SliderController::class, 'index']);
     Route::get('slider/{slider}', [SliderController::class, 'view']);
     Route::patch('slider/{slider}', [SliderController::class, 'update']);
-    Route::get('order/{order}/pay/{payment}', [PaymentController::class, 'email']);
+    Route::post('order/{order}/pay/{payment}', [PaymentController::class, 'email']);
 });
 
 //testing

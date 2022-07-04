@@ -90,9 +90,9 @@ if (!function_exists('pay_vo_num')) {
 
 // convert integer to money format from database
 if (!function_exists('RM')) {
-    function RM($amount)
+    function RM($amount, $format = ',')
     {
-        return number_format($amount / 100, 2);
+        return number_format($amount / 100, 2,'.',$format);
     }
 }
 

@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="robots" content="noindex,nofollow">
     <title>Admin ~ {{ config('app.name') }}</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
@@ -45,7 +46,8 @@
                         class="list-group-item list-group-item-action py-2 ripple {{ str_contains(request()->path(), 'slider') ? 'active' : '' }}">
                         <i class="fab fa-slideshare fa-fw me-3"></i><span>Sliders</span>
                     </a>
-                    <a href="/admin/variables" class="list-group-item list-group-item-action py-2 ripple {{ str_contains(request()->path(), 'var') ? 'active' : '' }}"><i
+                    <a href="/admin/variables"
+                        class="list-group-item list-group-item-action py-2 ripple {{ str_contains(request()->path(), 'var') ? 'active' : '' }}"><i
                             class="fas fa-pen-fancy fa-fw me-3"></i><span>Web Variables</span></a>
                     <a href="/" target="_blank" class="list-group-item list-group-item-action py-2 ripple"><i
                             class="fas fa-eye fa-fw me-3"></i><span>View Website</span></a>
@@ -71,8 +73,7 @@
 
                 <!-- Brand -->
                 <a class="navbar-brand" href="/admin">
-                    <img src="{{ asset('images/logo-2.png') }}" height="25" alt=""
-                        loading="lazy" />
+                    <img src="{{ asset('images/logo-2.png') }}" height="25" alt="" loading="lazy" />
                 </a>
 
             </div>

@@ -29,4 +29,9 @@ class Product extends Model
     {
         return $this->hasOne(Slider::class);
     }
+
+    public function addon()
+    {
+        return $this->hasMany(ProductAddon::class);
+    }
 }

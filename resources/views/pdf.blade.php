@@ -121,7 +121,7 @@
             @foreach ($order->item as $pro)
                 <tr>
                     <td scope="row" align="center">{{ $loop->iteration }}</td>
-                    <td>{{ $pro->product }}</td>
+                    <td>{!! $pro->product !!}</td>
                     <td align="center">{{ $pro->quantity }}</td>
                     <td align="center">{{ RM($pro->price) }}</td>
                     <td align="right">{{ RM($pro->total) }}</td>
