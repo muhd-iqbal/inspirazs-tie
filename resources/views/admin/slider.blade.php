@@ -14,7 +14,7 @@
                 </div>
             </div>
         @endif
-        <form action="/admin/slider/{{ $slider->id }}" method="POST" class="mb-4" enctype="multipart/form-data">
+        <form action="{{ config('tie.admin_prefix') }}/slider/{{ $slider->id }}" method="POST" class="mb-4" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="mb-4 row">

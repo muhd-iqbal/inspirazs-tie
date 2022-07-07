@@ -52,7 +52,7 @@ class PaymentController extends Controller
     {
         Mail::to($order->customer_email)->send(new PaymentMail($order, $payment));
 
-        return redirect("/admin/order/$order->id");
+        return redirect(config('tie.admin_prefix')."/order/$order->id");
     }
 
     public function createPDF($hash, $order, $payment)

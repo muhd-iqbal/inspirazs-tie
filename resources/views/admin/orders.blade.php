@@ -23,7 +23,8 @@
             </tfoot>
             <tbody>
                 @foreach ($orders as $order)
-                    <tr valign="middle" onclick="location.href='/admin/order/{{ $order->id }}'" role="button">
+                    <tr valign="middle" onclick="location.href='{{ config('tie.admin_prefix') }}/order/{{ $order->id }}'"
+                        role="button">
                         <th>{{ $order->id }}</th>
                         <td>{{ date('d-m-Y', strtotime($order->date)) }}</td>
                         <td>{{ $order->customer_organisation }}<br><small>{{ $order->customer_name }}</small></td>

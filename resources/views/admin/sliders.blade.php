@@ -11,18 +11,9 @@
                     <th>Active?</th>
                 </tr>
             </thead>
-            {{-- <tfoot>
-                <tr>
-                    <td colspan="5">
-                        <div class="d-flex justify-content-center">
-                            {{ $orders->links() }}
-                        </div>
-                    </td>
-                </tr>
-            </tfoot> --}}
             <tbody>
                 @foreach ($sliders as $slider)
-                    <tr valign="middle" onclick="location.href='/admin/slider/{{ $slider->id }}'" role="button">
+                    <tr valign="middle" onclick="location.href='{{ config('tie.admin_prefix') }}/slider/{{ $slider->id }}'" role="button">
                         <th>{{ $slider->product->name }}</th>
                         <td>{{ $slider->subtitle }}</td>
                         <td>

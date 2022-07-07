@@ -65,18 +65,6 @@
                             Inspirazs Sdn. Bhd. bergerak pantas ke hadapan untuk menjadi sebuah syarikat percetakan
                             terkemuka di Malaysia.
                         </p>
-
-                        {{-- <div class="bor16 p-l-29 p-b-9 m-t-22">
-                            <p class="stext-114 cl6 p-r-40 p-b-11">
-                                Creativity is just connecting things. When you ask creative people how they did
-                                something, they feel a little guilty because they didn't really do it, they just saw
-                                something. It seemed obvious to them after a while.
-                            </p>
-
-                            <span class="stext-111 cl8">
-                                - Steve Job’s
-                            </span>
-                        </div> --}}
                     </div>
                 </div>
 

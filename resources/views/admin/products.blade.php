@@ -21,7 +21,7 @@
                         </thead>
                         <tbody>
                             @foreach ($products as $prod)
-                                <tr onclick="location.href='/admin/product/{{ $prod->id }}'" role="button">
+                                <tr onclick="location.href='{{ config('tie.admin_prefix') }}/product/{{ $prod->id }}'" role="button">
                                     <th scope="row">{{ $prod->name }}</th>
                                     <td>{{ $prod->category->name }}</td>
                                     <td>{{ $prod->active }}</td>
@@ -62,23 +62,8 @@
                         <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
                         <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="/admin/products" method="POST" enctype="multipart/form-data">
+                    <form action="{{ config('tie.admin_prefix') }}/products" method="POST" enctype="multipart/form-data">
                         <div class="modal-body">
-                            @csrf
-                            {{-- <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline">
-                                        <input type="text" id="form6Example1" class="form-control" />
-                                        <label class="form-label" for="form6Example1">First name</label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-outline">
-                                        <input type="text" id="form6Example2" class="form-control" />
-                                        <label class="form-label" for="form6Example2">Last name</label>
-                                    </div>
-                                </div>
-                            </div> --}}
 
                             <!-- Text input -->
                             <label class="form-label" for="name">Name</label>
@@ -95,8 +80,7 @@
                             <!-- Email input -->
                             <label class="form-label" for="category_id">Category</label>
                             <div class="form-outline mb-4">
-                                {{-- <input type="email" id="form6Example5" class="form-control" /> --}}
-                                <select name="category_id" id="category_id" class="form-control">
+                                 <select name="category_id" id="category_id" class="form-control">
                                     @foreach ($categories as $cat)
                                         <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                     @endforeach

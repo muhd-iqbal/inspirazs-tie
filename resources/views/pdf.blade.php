@@ -76,15 +76,6 @@
                 @endif
             </td>
             <td align="right" valign="top">
-                {{-- <h3>{{ $web_var['company_name'] }}</h3>
-                <pre>
-                    {{ $web_var['company_address'] }}
-                    {{ $web_var['company_address_2'] }}
-                    {{ $web_var['company_postcode'] . ', ' . $web_var['company_city'] }}
-                    {{ $web_var['company_state'] }}
-                    Tel: {{ phone_format($web_var['company_phone']) }}
-                    Email:{{ $web_var['company_email'] }}
-            </pre> --}}
                 <p>Bayar Kepada:</p>
                 {{ $web_var['company_bank_acc'] }}
                 {!! array_key_exists('company_bank_acc_2', $web_var->toArray()) ? '<br>' . $web_var['company_bank_acc_2'] : '' !!}
@@ -140,17 +131,14 @@
 
         <tfoot>
             <tr>
-                {{-- <th colspan="3"></th> --}}
                 <th colspan="4" align="right">Subjumlah: RM</th>
                 <td align="right">{{ RM($order->total) }}</td>
             </tr>
             <tr>
-                {{-- <th colspan="3"></th> --}}
                 <th colspan="4" align="right">Penghantaran: RM</th>
                 <td align="right">{{ RM($order->shipping) }}</td>
             </tr>
             <tr>
-                {{-- <th colspan="3"></th> --}}
                 <th colspan="4" align="right">Jumlah: RM</th>
                 <td align="right">{{ RM($order->grand_total) }}</td>
             </tr>

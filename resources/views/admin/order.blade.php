@@ -10,7 +10,8 @@
     <div class="p-5 bg-white">
 
         <div class="d-flex justify-content-between">
-            <h2>Order ID: {{ $order->id }} <a href="/admin/orders" class="btn btn-warning">Kembali</a></h2>
+            <h2>Order ID: {{ $order->id }} <a href="{{ config('tie.admin_prefix') }}/orders"
+                    class="btn btn-warning">Kembali</a></h2>
             <h3 class="text-uppercase border border-dark px-2">{{ $order->method }}</h3>
             <button class="btn btn-info" onclick="window.open('/o/{{ $order->hash }}/{{ $order->id }}')">Lihat
                 Order</button>
@@ -28,7 +29,8 @@
         @endif
         <div class="mb-5">
 
-            <form class="" method="POST" action="/admin/order/{{ $order->id }}" enctype="multipart/form-data">
+            <form class="" method="POST" action="{{ config('tie.admin_prefix') }}/order/{{ $order->id }}"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div class="row my-4">
@@ -157,8 +159,8 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="/admin/order/{{ $order->id }}/pay" method="POST"
-                                enctype="multipart/form-data">
+                            <form action="{{ config('tie.admin_prefix') }}/order/{{ $order->id }}/pay"
+                                method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-outline mb-4">
                                     <input type="text" id="amount" name="amount" class="form-control"
@@ -229,15 +231,18 @@
                                         @endif
                                     </td>
                                     <td align="right" class="p-0 m-0 d-flex">
-                                        <form action="/admin/order/{{ $order->id }}/pay/{{ $pay->id }}"
+                                        <form
+                                            action="{{ config('tie.admin_prefix') }}/order/{{ $order->id }}/pay/{{ $pay->id }}"
                                             method="post">
                                             @csrf
                                             <button type="submit" class="btn shadow-none"
-                                                onclick="return confirm('Email payment: {{ $pay->reference }}?')" title="Email Payment To Customer">
+                                                onclick="return confirm('Email payment: {{ $pay->reference }}?')"
+                                                title="Email Payment To Customer">
                                                 <i class="fa fa-envelope"></i>
                                             </button>
                                         </form>
-                                        <form action="/admin/order/{{ $order->id }}/{{ $pay->id }}"
+                                        <form
+                                            action="{{ config('tie.admin_prefix') }}/order/{{ $order->id }}/{{ $pay->id }}"
                                             method="POST">
                                             @csrf
                                             @method('DELETE')

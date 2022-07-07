@@ -85,7 +85,6 @@
     </div>
 
     <!-- Shoping Cart -->
-    {{-- <form class="bg0 p-t-30 p-b-85"> --}}
     <div class="container p-t-30">
         <div class="card">
             <div class="card-header">
@@ -114,18 +113,6 @@
                             <div><strong>U/P: {{ session('customer_name') }}</strong></div>
                         @endif
                     </div>
-
-                    {{-- <div class="col-sm-6">
-                        <h6 class="mb-3">Kepada:</h6>
-                        <div>
-                            <strong>Bob Mart</strong>
-                        </div>
-                        <div>Attn: Daniel Marek</div>
-                        <div>43-190 Mikolow, Poland</div>
-                        <div>Email: marek@daniel.com</div>
-                        <div>Phone: +48 123 456 789</div>
-                    </div> --}}
-
                 </div>
 
                 <div class="table-responsive">
@@ -167,12 +154,6 @@
                                     </td>
                                     <td class="text-right">RM{{ RM(Cart::getSubtotal()) }}</td>
                                 </tr>
-                                {{-- <tr>
-                                    <td class="left">
-                                        <strong>Discount (20%)</strong>
-                                    </td>
-                                    <td class="right">$1,699,40</td>
-                                </tr> --}}
                                 <tr>
                                     <td class="left">
                                         <strong>Penghantaran</strong>
@@ -208,7 +189,6 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            {{-- <button class="btn btn-primary" type="submit"> --}}
                             <button type="submit" class="g-recaptchabtn-block btn-dark"
                                 data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit'>
                                 Sahkan Pesanan Anda</button>

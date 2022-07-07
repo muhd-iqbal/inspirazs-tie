@@ -52,15 +52,12 @@
                     <div class="card-body p-5">
                         <div class="row pb-2" style="height: 100px;">
                             <div class="col-md-6">
-                                {{-- <img src="{{ asset('images/logo-2.png') }}"> --}}
                             </div>
                             <div class="col-md-6 text-right">
                                 <p class="font-weight-bold mb-1">Pesanan #{{ $order->id }}</p>
-                                {{-- @if ($order->method == 'loan') --}}
-                                    <button class="btn btn-info"
-                                        onclick="location.href='/o/{{ $order->hash }}/{{ $order->id }}/pdf'">Muat
-                                        Turun Invois</button>
-                                {{-- @endif --}}
+                                <button class="btn btn-info"
+                                    onclick="location.href='/o/{{ $order->hash }}/{{ $order->id }}/pdf'">Muat
+                                    Turun Invois</button>
                             </div>
                         </div>
 
@@ -162,7 +159,8 @@
                                         Bayar Kepada:
                                     </div>
                                     <div class="">
-                                        <div class="h4 font-weight-bold text-uppercase">{{ $web_var['company_name'] }}</div>
+                                        <div class="h4 font-weight-bold text-uppercase">
+                                            {{ $web_var['company_name'] }}</div>
                                         <div class="h6">SSM: {{ $web_var['company_ssm'] }}</div>
                                         <div class="h6">{{ $web_var['company_address'] }}</div>
                                         <div class="h6">{{ $web_var['company_address_2'] }}</div>
@@ -176,8 +174,8 @@
                                         <div class="">
                                             <div><strong>No Akaun:</strong></div>
                                             <div> {{ $web_var['company_bank_acc'] }}</div>
-                                            {!! array_key_exists('company_bank_acc_2', $web_var->toArray()) ? '<div>' . $web_var['company_bank_acc_2'] .'</div>' : '' !!}
-                                            {!! array_key_exists('company_bank_acc_3', $web_var->toArray()) ? '<div>' . $web_var['company_bank_acc_3'] .'</div>' : '' !!}
+                                            {!! array_key_exists('company_bank_acc_2', $web_var->toArray()) ? '<div>' . $web_var['company_bank_acc_2'] . '</div>' : '' !!}
+                                            {!! array_key_exists('company_bank_acc_3', $web_var->toArray()) ? '<div>' . $web_var['company_bank_acc_3'] . '</div>' : '' !!}
 
                                         </div>
                                     </div>
@@ -258,24 +256,6 @@
                                 </div>
                             </div>
                         @endif
-
-
-                        {{-- <div class="d-flex flex-row-reverse p-4">
-                            <div class="py-3 px-5 text-right">
-                                <div class="mb-2">Jumlah</div>
-                                <div class="h4 font-weight-light">RM{{ RM($order->grand_total) }}</div>
-                            </div>
-
-                            <div class="py-3 px-5 text-right">
-                                <div class="mb-2">Penghantaran</div>
-                                <div class="h4 font-weight-light">{{ $order->shipping ? 'RM '. RM($order->shipping) : 'Percuma'}}</div>
-                            </div>
-
-                            <div class="py-3 px-5 text-right">
-                                <div class="mb-2">Subjumlah</div>
-                                <div class="h4 font-weight-light">RM{{ RM($order->total) }}</div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>

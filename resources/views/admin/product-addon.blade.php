@@ -4,7 +4,7 @@
     <div class="p-5 bg-white">
 
         <div class="d-flex justify-content-between">
-            <h2>Addon for: {{ $product->name }} <a href="/admin/product/{{ $product->id }}"
+            <h2>Addon for: {{ $product->name }} <a href="{{ config('tie.admin_prefix') }}/product/{{ $product->id }}"
                     class="btn btn-warning">Kembali</a></h2>
         </div>
         @if (count($errors) > 0)
@@ -23,7 +23,7 @@
             Add addon
         </h4>
 
-        <form action="/admin/product/{{ $product->id }}/addon" method="POST">
+        <form action="{{ config('tie.admin_prefix') }}/product/{{ $product->id }}/addon" method="POST">
             @csrf
             <div class="row mb-4">
                 <div class="col">
@@ -53,7 +53,7 @@
             </h4>
 
             @foreach ($product->addon as $add)
-                <form action="/admin/product/{{ $product->id }}/addon/{{ $add->id }}" method="POST">
+                <form action="{{ config('tie.admin_prefix') }}/product/{{ $product->id }}/addon/{{ $add->id }}" method="POST">
                     @csrf
                     @method('PATCH')
                     <div class="row mb-4">

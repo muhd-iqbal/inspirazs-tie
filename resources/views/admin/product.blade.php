@@ -7,8 +7,8 @@
             <h2>Produk ID: {{ $product->id }}
                 <button onclick="window.open('/product/{{ $product->slug }}','_blank')" target="_blank"
                     class="btn btn-info">Lihat</button></h2>
-                    <button onclick="location.href='/admin/product/{{ $product->id }}/addon'" class="btn btn-success">Product Addons?</button>
-                    <button onclick="location.href='/admin/product/{{ $product->id }}/price'" class="btn btn-info">Update
+                    <button onclick="location.href='{{ config('tie.admin_prefix') }}/product/{{ $product->id }}/addon'" class="btn btn-success">Product Addons?</button>
+                    <button onclick="location.href='{{ config('tie.admin_prefix') }}/product/{{ $product->id }}/price'" class="btn btn-info">Update
                         Price</button>
 
         </div>
@@ -23,7 +23,7 @@
                 </div>
             </div>
         @endif
-        <form class="" method="POST" action="/admin/product/{{ $product->id }}" enctype="multipart/form-data">
+        <form class="" method="POST" action="{{ config('tie.admin_prefix') }}/product/{{ $product->id }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="row my-4">
@@ -102,13 +102,6 @@
                     </div>
                 </div>
             </div>
-
-
-            {{-- <div class="form-outline mb-4">
-                <textarea class="form-control" id="desc_short" name="desc_short" rows="4">{{ old('desc_short') ? old('desc_short') : $product->desc_short }}</textarea>
-                <label class="form-label" for="desc_short">Short Description</label>
-            </div> --}}
-
             <small class="mb-4 text-danger">Generate html, copy dan paste here. <a href="https://wordtohtml.net/"
                     target="_blank">CLICK HERE</a></small>
             <div class="form-outline mb-4">
@@ -156,7 +149,7 @@
         <div class="mt-5">
             <div class="d-flex justify-content-between">
                 <h3>Additional Photos</h3>
-                <form action="/admin/product/{{ $product->id }}" method="post" enctype="multipart/form-data">
+                <form action="{{ config('tie.admin_prefix') }}/product/{{ $product->id }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="file" name="photo" id="photo" required>
 
@@ -172,7 +165,7 @@
                             <img src="{{ asset('storage/products/' . $img->path) }}" class="img-thumbnail"
                                 alt="Image for {{ $product->name }}">
                             <div class="position-absolute top-0">
-                                <form action="/admin/product/{{ $product->id }}/{{ $img->id }}" method="POST">
+                                <form action="{{ config('tie.admin_prefix') }}/product/{{ $product->id }}/{{ $img->id }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" onclick="return confirm('Delete Photo?')">X</button>

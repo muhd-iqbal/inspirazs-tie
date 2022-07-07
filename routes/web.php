@@ -66,13 +66,10 @@ Route::get('toyyibpay/{order}', [ToyyibpayController::class, 'create'])->name('t
 Route::get('toyyibpay-status', [ToyyibpayController::class, 'status'])->name('toyyibpay-status');
 Route::post('toyyibpay-callback', [ToyyibpayController::class, 'callback'])->name('toyyibpay-callback');
 
-Route::get('admin/variables', [VariableController::class, 'list']);
-Route::post('admin/var', [VariableController::class, 'add']);
-Route::post('admin/var/{var}', [VariableController::class, 'update']);
 
 Auth::routes();
 
-Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'ti-admin',  'middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin');
     Route::get('categories', [ProductCategoryController::class, 'index']);
     Route::post('categories', [ProductCategoryController::class, 'add']);
@@ -97,6 +94,9 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::get('slider/{slider}', [SliderController::class, 'view']);
     Route::patch('slider/{slider}', [SliderController::class, 'update']);
     Route::post('order/{order}/pay/{payment}', [PaymentController::class, 'email']);
+    Route::get('variables', [VariableController::class, 'list']);
+    Route::post('var', [VariableController::class, 'add']);
+    Route::post('var/{var}', [VariableController::class, 'update']);
 });
 
 //testing

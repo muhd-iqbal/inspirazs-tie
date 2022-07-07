@@ -4,8 +4,9 @@
     <div class="p-5 bg-white">
 
         <div class="d-flex justify-content-between">
-            <h2>Price for product: {{ $product->name }} <a href="/admin/product/{{ $product->id }}"
-                    class="btn btn-warning">Kembali</a></h2>
+            <h2>Price for product: {{ $product->name }} <a
+                    href="{{ config('tie.admin_prefix') }}/product/{{ $product->id }}" class="btn btn-warning">Kembali</a>
+            </h2>
         </div>
         @if (count($errors) > 0)
             <div class="row">
@@ -71,19 +72,22 @@
 
         <h4 class="text-center mb-2">Modify Price Here </h4>
         @foreach ($prices as $price)
-            <form action="/admin/price/{{ $price->id }}" method="POST" id="form-update-{{ $price->id }}">
+            <form action="{{ config('tie.admin_prefix') }}/price/{{ $price->id }}" method="POST"
+                id="form-update-{{ $price->id }}">
                 @csrf
                 @method('PATCH')
                 <div class="row mb-4">
                     <div class="col">
                         <div class="form-outline">
-                            <input type="text" id="min" name="min" class="form-control" value="{{ $price->min }}" />
+                            <input type="text" id="min" name="min" class="form-control"
+                                value="{{ $price->min }}" />
                             <label class="form-label" for="min">From</label>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-outline">
-                            <input type="text" id="max" name="max" class="form-control" value="{{ $price->max }}" />
+                            <input type="text" id="max" name="max" class="form-control"
+                                value="{{ $price->max }}" />
                             <label class="form-label" for="max">To</label>
                         </div>
                     </div>
@@ -103,7 +107,8 @@
                     </div>
                 </div>
             </form>
-            <form action="/admin/price/{{ $price->id }}" method="POST" id="form-delete-{{ $price->id }}">
+            <form action="{{ config('tie.admin_prefix') }}/price/{{ $price->id }}" method="POST"
+                id="form-delete-{{ $price->id }}">
                 @csrf
                 @method('DELETE')
             </form>

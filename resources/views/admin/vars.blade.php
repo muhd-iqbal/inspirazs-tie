@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="p-5">
-        <a href="/admin"><i class="fas fa-angle-double-left"></i> Back to dashboard</a>
+        <a href="{{ config('tie.admin_prefix') }}"><i class="fas fa-angle-double-left"></i> Back to dashboard</a>
         <div class="table-responsive mb-5">
             <table>
                 <tr>
@@ -13,7 +13,7 @@
                 </tr>
                 @foreach ($vars as $var)
                     <tr>
-                        <form action="/admin/var/{{ $var->id }}" method="POST">
+                        <form action="{{ config('tie.admin_prefix') }}/var/{{ $var->id }}" method="POST">
                             @csrf
                             <td>
                                 {{ $var->name }}:
@@ -32,7 +32,7 @@
 
         <div class="border">
             <p>Add Variable</p>
-            <form action="/admin/var" method="POST">
+            <form action="{{ config('tie.admin_prefix') }}/var" method="POST">
                 @csrf
                 <input type="text" name="name" id="name" placeholder="Variable Name" value="{{ old('name') }}">
                 <input type="text" name="description" id="description" placeholder="Value / Description"

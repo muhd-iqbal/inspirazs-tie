@@ -94,10 +94,10 @@ class CartController extends Controller
             'customer_city' => 'required|max:100',
             'customer_state' => 'required|max:50',
         ]);
-
-        if (Cart::getTotalQuantity() >= Variable::select('description')->where('name', '=', 'free_shipping')->first()->description) {
+        $freeship = Variable::select('description')->where('name', '=', 'free_shipping')->first()->description;
+        if (Cart::getTotalQuantity() >= $freeship) {
             session(['shipping_fees' => 0]);
-        } else {
+        } elseif (Cart::getTotalQuantity() < $freeship && get_total_weight() <= 10) {
             $shipping = DB::table('shippings')
                 ->select('fee')
                 ->where('postcode_fr', '<=', $request->customer_postcode)
@@ -107,6 +107,23 @@ class CartController extends Controller
                 ->first();
 
             session(['shipping_fees' => $shipping->fee]);
+        } else {
+            $shipping_base = DB::table('shippings')
+                ->select('fee')
+                ->where('postcode_fr', '<=', $request->customer_postcode)
+                ->where('postcode_to', '>=', $request->customer_postcode)
+                ->where('weight_to', '=', '10000')
+                ->first();
+            $shipping_add = DB::table('shippings')
+                ->select('fee')
+                ->where('postcode_fr', '<=', $request->customer_postcode)
+                ->where('postcode_to', '>=', $request->customer_postcode)
+                ->where('weight_fr', '=', '10001')
+                ->first();
+
+            $addtional_weight = ceil((get_total_weight() - 10000) / 1000);
+            $shipping = $shipping_base->fee + $shipping_add->fee * $addtional_weight;
+            session(['shipping_fees' => $shipping]);
         }
 
         session($request->toArray());

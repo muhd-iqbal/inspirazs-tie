@@ -54,7 +54,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
                         <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="/admin/categories" method="POST">
+                    <form action="{{ config('tie.admin_prefix') }}/categories" method="POST">
                         <div class="modal-body">
                             @csrf
                             <div class="form-outline mb-4">

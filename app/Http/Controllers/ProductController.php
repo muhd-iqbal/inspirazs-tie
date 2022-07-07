@@ -56,7 +56,7 @@ class ProductController extends Controller
 
         $pro = Product::create($attr);
 
-        return redirect('/admin/product/'.$pro->id);
+        return redirect(config('tie.admin_prefix').'/product/'.$pro->id);
     }
 
     public function list()

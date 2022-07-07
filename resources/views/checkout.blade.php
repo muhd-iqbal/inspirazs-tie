@@ -80,7 +80,6 @@
     </div>
 
     <!-- Shoping Cart -->
-    {{-- <form class="bg0 p-t-30 p-b-85"> --}}
     <div class="container p-t-30">
         <div class="row">
 
@@ -121,8 +120,6 @@
                                         data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit'>
                                         Simpan
                                     </button>
-
-                                    {{-- <button type="submit" class="">Request a demo</button> --}}
                                 </div>
                             </div>
                         </form>
@@ -160,8 +157,6 @@
             </div>
         </div>
     </div>
-    {{-- </form> --}}
-
     <script>
         function onSubmit(token) {
             document.getElementById("checkout").submit();

@@ -21,12 +21,11 @@
                                     <th scope="col">No Phone</th>
                                     <th scope="col">Amount</th>
                                     <th scope="col">Bayaran</th>
-                                    {{-- <th scope="col">Avg. Price</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($orders as $order)
-                                    <tr onclick="location.href='/admin/order/{{ $order->id }}'" role="button">
+                                    <tr onclick="location.href='{{ config('tie.admin_prefix') }}/order/{{ $order->id }}'" role="button">
                                         <th scope="row">{{ $order->id }}</th>
                                         <td>{{ $order->customer_name }}</td>
                                         <td>{{ phone_format($order->customer_phone) }}</td>
@@ -183,7 +182,7 @@
                             <div class="d-flex justify-content-between p-md-1">
                                 <div class="d-flex flex-row">
                                     <div class="align-self-center">
-                                        <h2 class="h1 mb-0 me-4">$36,000.00</h2>
+                                    <h2 class="h1 mb-0 me-4">$36,000.00</h2>
                                     </div>
                                     <div>
                                         <h4>Total Cost</h4>
