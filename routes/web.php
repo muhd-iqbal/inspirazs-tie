@@ -48,6 +48,7 @@ Route::delete('shopping-cart/{cart}', [CartController::class, 'remove']);
 Route::post('add-to-cart/{product}', [CartController::class, 'add']);
 Route::get('products', [ProductController::class, 'index']);
 Route::get('product/{slug}', [ProductController::class, 'select']);
+Route::get('produk/{slug}', fn ($slug) => redirect('/product/' . $slug));
 Route::get('checkout', [CartController::class, 'checkout']);
 Route::post('checkout', [CartController::class, 'checkout_address']);
 Route::get('checkout-confirm', [CartController::class, 'checkout_confirm']);

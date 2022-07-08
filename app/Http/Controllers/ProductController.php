@@ -21,7 +21,9 @@ class ProductController extends Controller
     {
         $product = Product::with('prices')->where('slug', '=', $slug)->first();
 
-
+        if ($product == null) {
+            return redirect('/')->with('error', 'Tiada Produk');
+        }
         if ($product->active == 0) {
             return redirect('/')->with('error', 'Tiada Produk');
         }
@@ -56,7 +58,7 @@ class ProductController extends Controller
 
         $pro = Product::create($attr);
 
-        return redirect(config('tie.admin_prefix').'/product/'.$pro->id);
+        return redirect(config('tie.admin_prefix') . '/product/' . $pro->id);
     }
 
     public function list()
@@ -113,5 +115,4 @@ class ProductController extends Controller
 
         return back()->with('success', 'Product Updated');
     }
-
 }

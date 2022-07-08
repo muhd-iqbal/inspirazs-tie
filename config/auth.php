@@ -108,4 +108,6 @@ return [
 
     'password_timeout' => 10800,
 
+    'pos_url' => env('POS_URL'),
+
 ];
