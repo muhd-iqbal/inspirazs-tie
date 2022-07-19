@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductAddonController;
 use App\Http\Controllers\ProductCategoryController;
@@ -57,6 +59,7 @@ Route::get('/o/{hash}/{order}', [OrderController::class, 'view']);
 Route::get('/o/{hash}/{order}/pdf', [OrderController::class, 'createPDF']);
 Route::get('/o/{hash}/{order}/{payment}/pdf', [PaymentController::class, 'createPDF']);
 Route::post('/o/{hash}/{order}/change-payment-method', [OrderController::class, 'changePaymentMethod']);
+Route::get('page/{hash}', [PageController::class, 'show']);
 
 Route::get('pay/{order}', [OrderController::class, 'payment']);
 
@@ -98,6 +101,11 @@ Route::group(['prefix' => 'ti-admin',  'middleware' => 'auth'], function () {
     Route::get('variables', [VariableController::class, 'list']);
     Route::post('var', [VariableController::class, 'add']);
     Route::post('var/{var}', [VariableController::class, 'update']);
+    Route::get('pages', [PageController::class, 'index']);
+    Route::get('page/{page}', [PageController::class, 'edit']);
+    Route::patch('page/{page}', [PageController::class, 'patch']);
+    Route::get('gallery', [GalleryController::class, 'index']);
+    Route::post('gallery', [GalleryController::class, 'add']);
 });
 
 //testing

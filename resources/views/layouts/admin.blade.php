@@ -46,6 +46,14 @@
                         class="list-group-item list-group-item-action py-2 ripple {{ str_contains(request()->path(), 'slider') ? 'active' : '' }}">
                         <i class="fab fa-slideshare fa-fw me-3"></i><span>Sliders</span>
                     </a>
+                    <a href="{{ config('tie.admin_prefix') }}/pages"
+                        class="list-group-item list-group-item-action py-2 ripple {{ str_contains(request()->path(), 'pages') ? 'active' : '' }}">
+                        <i class="fas fa-pager fa-fw me-3"></i><span>Pages</span>
+                    </a>
+                    <a href="{{ config('tie.admin_prefix') }}/gallery"
+                        class="list-group-item list-group-item-action py-2 ripple {{ str_contains(request()->path(), 'gallery') ? 'active' : '' }}">
+                        <i class="fa fa-images fa-fw me-3"></i><span>Gallery</span>
+                    </a>
                     <a href="{{ config('tie.admin_prefix') }}/variables"
                         class="list-group-item list-group-item-action py-2 ripple {{ str_contains(request()->path(), 'var') ? 'active' : '' }}"><i
                             class="fas fa-pen-fancy fa-fw me-3"></i><span>Web Variables</span></a>
